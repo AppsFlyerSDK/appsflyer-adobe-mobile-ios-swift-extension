@@ -1,0 +1,1 @@
+# appsflyer-adobe-mobile-ios-swift-extension
