@@ -23,6 +23,7 @@ AppsFlyer iOS SDK Extension for Adobe Mobile SDK.
   s.ios.deployment_target = '10.0'
   s.source_files = 'AppsFlyerAdobeExtension/Sources/**/*.{swift,h,m}'
   s.static_framework = true
+  s.swift_version = "4.2"
 
   s.public_header_files = 'AppsFlyerAdobeExtension/Sources/**/*.h'
 
