@@ -6,9 +6,11 @@ target 'Adobe AEP Sample' do
   use_frameworks!
 
   # Pods for Adobe AEP Sample
-#pod 'AEPMobileServices'
-#pod 'AEPAnalytics' 
-pod 'AppsFlyerAdobeAEPExtension', :path => '../'
-pod 'AEPCore'
+  pod 'AEPLifecycle'
+  pod 'AEPSignal'
+  pod 'AEPMobileServices'
+  pod 'AEPAnalytics' 
+  pod 'AppsFlyerAdobeAEPExtension', :path => '../'
+  pod 'AEPCore'
 
 end
