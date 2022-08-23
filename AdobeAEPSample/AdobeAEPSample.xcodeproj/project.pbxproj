@@ -1,0 +1,521 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 55;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		615D8B2C5DE920626C776FDB /* Pods_Adobe_AEP_Sample.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE4D277411118EAB4507CA48 /* Pods_Adobe_AEP_Sample.framework */; };
+		C62EA2DD283D138C005FFEF7 /* AEPAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = C62EA2DC283D138C005FFEF7 /* AEPAnalytics */; };
+		C62EA2EF283D158F005FFEF7 /* AEPIdentity in Frameworks */ = {isa = PBXBuildFile; productRef = C62EA2EE283D158F005FFEF7 /* AEPIdentity */; };
+		C62EA2F1283D158F005FFEF7 /* AEPLifecycle in Frameworks */ = {isa = PBXBuildFile; productRef = C62EA2F0283D158F005FFEF7 /* AEPLifecycle */; };
+		C62EA2F3283D158F005FFEF7 /* AEPServices in Frameworks */ = {isa = PBXBuildFile; productRef = C62EA2F2283D158F005FFEF7 /* AEPServices */; };
+		C62EA2F5283D158F005FFEF7 /* AEPSignal in Frameworks */ = {isa = PBXBuildFile; productRef = C62EA2F4283D158F005FFEF7 /* AEPSignal */; };
+		C66DE3EB270F2FB700DE3AEC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C66DE3EA270F2FB700DE3AEC /* AppDelegate.swift */; };
+		C66DE3ED270F2FB700DE3AEC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C66DE3EC270F2FB700DE3AEC /* SceneDelegate.swift */; };
+		C66DE3EF270F2FB700DE3AEC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C66DE3EE270F2FB700DE3AEC /* ViewController.swift */; };
+		C66DE3F2270F2FB700DE3AEC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C66DE3F0270F2FB700DE3AEC /* Main.storyboard */; };
+		C66DE3F4270F2FBC00DE3AEC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C66DE3F3270F2FBC00DE3AEC /* Assets.xcassets */; };
+		C66DE3F7270F2FBC00DE3AEC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C66DE3F5270F2FBC00DE3AEC /* LaunchScreen.storyboard */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		019E787829F5C12575DD338C /* Pods-Adobe AEP Sample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Adobe AEP Sample.release.xcconfig"; path = "Target Support Files/Pods-Adobe AEP Sample/Pods-Adobe AEP Sample.release.xcconfig"; sourceTree = "<group>"; };
+		0CB296507880E123732F9406 /* Pods-Adobe AEP Sample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Adobe AEP Sample.debug.xcconfig"; path = "Target Support Files/Pods-Adobe AEP Sample/Pods-Adobe AEP Sample.debug.xcconfig"; sourceTree = "<group>"; };
+		C62EA2DA283D1334005FFEF7 /* AEPCore */ = {isa = PBXFileReference; lastKnownFileType = folder; name = AEPCore; path = "../../../../../../../../Library/Developer/Xcode/DerivedData/AdobeAEPSample-eensgbbfxqlbmnazibnemsjssjag/SourcePackages/checkouts/aepsdk-core-ios/AEPCore"; sourceTree = "<group>"; };
+		C62EA2E9283D1441005FFEF7 /* AEPCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = AEPCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C65307C1271456FC0076DB91 /* Adobe AEP Sample.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Adobe AEP Sample.entitlements"; sourceTree = "<group>"; };
+		C66DE3E7270F2FB700DE3AEC /* Adobe AEP Sample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Adobe AEP Sample.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		C66DE3EA270F2FB700DE3AEC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		C66DE3EC270F2FB700DE3AEC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		C66DE3EE270F2FB700DE3AEC /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		C66DE3F1270F2FB700DE3AEC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		C66DE3F3270F2FBC00DE3AEC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		C66DE3F6270F2FBC00DE3AEC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		C66DE3F8270F2FBC00DE3AEC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DE4D277411118EAB4507CA48 /* Pods_Adobe_AEP_Sample.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Adobe_AEP_Sample.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		C66DE3E4270F2FB700DE3AEC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				615D8B2C5DE920626C776FDB /* Pods_Adobe_AEP_Sample.framework in Frameworks */,
+				C62EA2F1283D158F005FFEF7 /* AEPLifecycle in Frameworks */,
+				C62EA2EF283D158F005FFEF7 /* AEPIdentity in Frameworks */,
+				C62EA2F5283D158F005FFEF7 /* AEPSignal in Frameworks */,
+				C62EA2F3283D158F005FFEF7 /* AEPServices in Frameworks */,
+				C62EA2DD283D138C005FFEF7 /* AEPAnalytics in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		238813AD90017387B8701961 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				0CB296507880E123732F9406 /* Pods-Adobe AEP Sample.debug.xcconfig */,
+				019E787829F5C12575DD338C /* Pods-Adobe AEP Sample.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		C6261E67283CDA7400E0494F /* Packages */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Packages;
+			sourceTree = "<group>";
+		};
+		C66DE3DE270F2FB700DE3AEC = {
+			isa = PBXGroup;
+			children = (
+				C6261E67283CDA7400E0494F /* Packages */,
+				C66DE3E9270F2FB700DE3AEC /* Adobe AEP Sample */,
+				C66DE3E8270F2FB700DE3AEC /* Products */,
+				C66DE416270F429700DE3AEC /* Frameworks */,
+				238813AD90017387B8701961 /* Pods */,
+			);
+			sourceTree = "<group>";
+		};
+		C66DE3E8270F2FB700DE3AEC /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				C66DE3E7270F2FB700DE3AEC /* Adobe AEP Sample.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		C66DE3E9270F2FB700DE3AEC /* Adobe AEP Sample */ = {
+			isa = PBXGroup;
+			children = (
+				C65307C1271456FC0076DB91 /* Adobe AEP Sample.entitlements */,
+				C66DE3EA270F2FB700DE3AEC /* AppDelegate.swift */,
+				C66DE3EC270F2FB700DE3AEC /* SceneDelegate.swift */,
+				C66DE3EE270F2FB700DE3AEC /* ViewController.swift */,
+				C66DE3F0270F2FB700DE3AEC /* Main.storyboard */,
+				C66DE3F3270F2FBC00DE3AEC /* Assets.xcassets */,
+				C66DE3F5270F2FBC00DE3AEC /* LaunchScreen.storyboard */,
+				C66DE3F8270F2FBC00DE3AEC /* Info.plist */,
+			);
+			path = "Adobe AEP Sample";
+			sourceTree = "<group>";
+		};
+		C66DE416270F429700DE3AEC /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				C62EA2E9283D1441005FFEF7 /* AEPCore.framework */,
+				DE4D277411118EAB4507CA48 /* Pods_Adobe_AEP_Sample.framework */,
+				C62EA2DA283D1334005FFEF7 /* AEPCore */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		C66DE3E6270F2FB700DE3AEC /* Adobe AEP Sample */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C66DE3FB270F2FBC00DE3AEC /* Build configuration list for PBXNativeTarget "Adobe AEP Sample" */;
+			buildPhases = (
+				33AB86801E684B2DB29DD115 /* [CP] Check Pods Manifest.lock */,
+				C66DE3E3270F2FB700DE3AEC /* Sources */,
+				C66DE3E4270F2FB700DE3AEC /* Frameworks */,
+				C66DE3E5270F2FB700DE3AEC /* Resources */,
+				B525A4F14DCFB612C6D0E681 /* [CP] Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Adobe AEP Sample";
+			packageProductDependencies = (
+				C62EA2DC283D138C005FFEF7 /* AEPAnalytics */,
+				C62EA2EE283D158F005FFEF7 /* AEPIdentity */,
+				C62EA2F0283D158F005FFEF7 /* AEPLifecycle */,
+				C62EA2F2283D158F005FFEF7 /* AEPServices */,
+				C62EA2F4283D158F005FFEF7 /* AEPSignal */,
+			);
+			productName = "Adobe AEP Sample";
+			productReference = C66DE3E7270F2FB700DE3AEC /* Adobe AEP Sample.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		C66DE3DF270F2FB700DE3AEC /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1300;
+				LastUpgradeCheck = 1300;
+				TargetAttributes = {
+					C66DE3E6270F2FB700DE3AEC = {
+						CreatedOnToolsVersion = 13.0;
+					};
+				};
+			};
+			buildConfigurationList = C66DE3E2270F2FB700DE3AEC /* Build configuration list for PBXProject "AdobeAEPSample" */;
+			compatibilityVersion = "Xcode 13.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = C66DE3DE270F2FB700DE3AEC;
+			packageReferences = (
+				C62EA2DB283D138C005FFEF7 /* XCRemoteSwiftPackageReference "aepsdk-analytics-ios" */,
+				C62EA2DE283D139F005FFEF7 /* XCRemoteSwiftPackageReference "aepsdk-core-ios" */,
+			);
+			productRefGroup = C66DE3E8270F2FB700DE3AEC /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				C66DE3E6270F2FB700DE3AEC /* Adobe AEP Sample */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		C66DE3E5270F2FB700DE3AEC /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C66DE3F7270F2FBC00DE3AEC /* LaunchScreen.storyboard in Resources */,
+				C66DE3F4270F2FBC00DE3AEC /* Assets.xcassets in Resources */,
+				C66DE3F2270F2FB700DE3AEC /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		33AB86801E684B2DB29DD115 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Adobe AEP Sample-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B525A4F14DCFB612C6D0E681 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Adobe AEP Sample/Pods-Adobe AEP Sample-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Adobe AEP Sample/Pods-Adobe AEP Sample-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Adobe AEP Sample/Pods-Adobe AEP Sample-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		C66DE3E3270F2FB700DE3AEC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C66DE3EF270F2FB700DE3AEC /* ViewController.swift in Sources */,
+				C66DE3EB270F2FB700DE3AEC /* AppDelegate.swift in Sources */,
+				C66DE3ED270F2FB700DE3AEC /* SceneDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		C66DE3F0270F2FB700DE3AEC /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C66DE3F1270F2FB700DE3AEC /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		C66DE3F5270F2FBC00DE3AEC /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C66DE3F6270F2FBC00DE3AEC /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		C66DE3F9270F2FBC00DE3AEC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		C66DE3FA270F2FBC00DE3AEC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		C66DE3FC270F2FBC00DE3AEC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "Adobe AEP Sample/Adobe AEP Sample.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 6UQAD4B3U2;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Adobe AEP Sample/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = AdobeAEPSample;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.appsflyer.Adobe-AEP-Sample";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		C66DE3FD270F2FBC00DE3AEC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "Adobe AEP Sample/Adobe AEP Sample.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 6UQAD4B3U2;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Adobe AEP Sample/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = AdobeAEPSample;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.appsflyer.Adobe-AEP-Sample";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		C66DE3E2270F2FB700DE3AEC /* Build configuration list for PBXProject "AdobeAEPSample" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C66DE3F9270F2FBC00DE3AEC /* Debug */,
+				C66DE3FA270F2FBC00DE3AEC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C66DE3FB270F2FBC00DE3AEC /* Build configuration list for PBXNativeTarget "Adobe AEP Sample" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C66DE3FC270F2FBC00DE3AEC /* Debug */,
+				C66DE3FD270F2FBC00DE3AEC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		C62EA2DB283D138C005FFEF7 /* XCRemoteSwiftPackageReference "aepsdk-analytics-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/adobe/aepsdk-analytics-ios.git";
+			requirement = {
+				kind = upToNextMinorVersion;
+				minimumVersion = 3.1.0;
+			};
+		};
+		C62EA2DE283D139F005FFEF7 /* XCRemoteSwiftPackageReference "aepsdk-core-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/adobe/aepsdk-core-ios.git";
+			requirement = {
+				kind = exactVersion;
+				version = 3.5.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		C62EA2DC283D138C005FFEF7 /* AEPAnalytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C62EA2DB283D138C005FFEF7 /* XCRemoteSwiftPackageReference "aepsdk-analytics-ios" */;
+			productName = AEPAnalytics;
+		};
+		C62EA2EE283D158F005FFEF7 /* AEPIdentity */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C62EA2DE283D139F005FFEF7 /* XCRemoteSwiftPackageReference "aepsdk-core-ios" */;
+			productName = AEPIdentity;
+		};
+		C62EA2F0283D158F005FFEF7 /* AEPLifecycle */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C62EA2DE283D139F005FFEF7 /* XCRemoteSwiftPackageReference "aepsdk-core-ios" */;
+			productName = AEPLifecycle;
+		};
+		C62EA2F2283D158F005FFEF7 /* AEPServices */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C62EA2DE283D139F005FFEF7 /* XCRemoteSwiftPackageReference "aepsdk-core-ios" */;
+			productName = AEPServices;
+		};
+		C62EA2F4283D158F005FFEF7 /* AEPSignal */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C62EA2DE283D139F005FFEF7 /* XCRemoteSwiftPackageReference "aepsdk-core-ios" */;
+			productName = AEPSignal;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = C66DE3DF270F2FB700DE3AEC /* Project object */;
+}
