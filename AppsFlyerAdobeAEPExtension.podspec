@@ -9,7 +9,7 @@
    
 Pod::Spec.new do |s|
   s.name             = 'AppsFlyerAdobeAEPExtension'
-  s.version          = '6.6.0'
+  s.version          = '6.8.1'
   s.summary          = 'AppsFlyer iOS SDK Extension for Adobe Mobile SDK'
   s.description      = <<-DESC
 AppsFlyer iOS SDK Extension for Adobe Mobile SDK.
@@ -23,10 +23,11 @@ AppsFlyer iOS SDK Extension for Adobe Mobile SDK.
   s.ios.deployment_target = '10.0'
   s.source_files = 'AppsFlyerAdobeExtension/Sources/**/*.{swift,h,m}'
   s.static_framework = true
+  s.swift_version = "4.2"
 
   s.public_header_files = 'AppsFlyerAdobeExtension/Sources/**/*.h'
 
-  s.dependency 'AppsFlyerFramework', '6.6.0'
+  s.dependency 'AppsFlyerFramework', '6.8.1'
   s.dependency 'AEPCore'
   s.dependency 'AEPIdentity'
 

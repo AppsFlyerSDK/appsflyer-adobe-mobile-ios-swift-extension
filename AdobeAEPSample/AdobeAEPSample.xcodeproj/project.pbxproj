@@ -14,30 +14,13 @@
 		C66DE3F2270F2FB700DE3AEC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C66DE3F0270F2FB700DE3AEC /* Main.storyboard */; };
 		C66DE3F4270F2FBC00DE3AEC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C66DE3F3270F2FBC00DE3AEC /* Assets.xcassets */; };
 		C66DE3F7270F2FBC00DE3AEC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C66DE3F5270F2FBC00DE3AEC /* LaunchScreen.storyboard */; };
-		C66DE41E2712EA0B00DE3AEC /* AEPCore in Frameworks */ = {isa = PBXBuildFile; productRef = C66DE41D2712EA0B00DE3AEC /* AEPCore */; };
-		C66DE4202712EA0B00DE3AEC /* AEPIdentity in Frameworks */ = {isa = PBXBuildFile; productRef = C66DE41F2712EA0B00DE3AEC /* AEPIdentity */; };
-		C66DE4222712EA0B00DE3AEC /* AEPLifecycle in Frameworks */ = {isa = PBXBuildFile; productRef = C66DE4212712EA0B00DE3AEC /* AEPLifecycle */; };
-		C66DE4242712EA0B00DE3AEC /* AEPServices in Frameworks */ = {isa = PBXBuildFile; productRef = C66DE4232712EA0B00DE3AEC /* AEPServices */; };
-		C66DE4262712EA0B00DE3AEC /* AEPSignal in Frameworks */ = {isa = PBXBuildFile; productRef = C66DE4252712EA0B00DE3AEC /* AEPSignal */; };
-		C6EB16252815939F00F838F1 /* AEPAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = C6EB16242815939F00F838F1 /* AEPAnalytics */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXCopyFilesBuildPhase section */
-		C66DE419270F42A200DE3AEC /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
-
 /* Begin PBXFileReference section */
-		019E787829F5C12575DD338C /* Pods-Adobe AEP Sample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Adobe AEP Sample.release.xcconfig"; path = "Target Support Files/Pods-Adobe AEP Sample/Pods-Adobe AEP Sample.release.xcconfig"; sourceTree = "<group>"; };
-		0CB296507880E123732F9406 /* Pods-Adobe AEP Sample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Adobe AEP Sample.debug.xcconfig"; path = "Target Support Files/Pods-Adobe AEP Sample/Pods-Adobe AEP Sample.debug.xcconfig"; sourceTree = "<group>"; };
+		44D1A7D26E88FDE85F873F90 /* Pods-Adobe AEP Sample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Adobe AEP Sample.debug.xcconfig"; path = "Target Support Files/Pods-Adobe AEP Sample/Pods-Adobe AEP Sample.debug.xcconfig"; sourceTree = "<group>"; };
+		72B64E08989485DE0B448387 /* Pods-Adobe AEP Sample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Adobe AEP Sample.release.xcconfig"; path = "Target Support Files/Pods-Adobe AEP Sample/Pods-Adobe AEP Sample.release.xcconfig"; sourceTree = "<group>"; };
+		C62EA2DA283D1334005FFEF7 /* AEPCore */ = {isa = PBXFileReference; lastKnownFileType = folder; name = AEPCore; path = "../../../../../../../../Library/Developer/Xcode/DerivedData/AdobeAEPSample-eensgbbfxqlbmnazibnemsjssjag/SourcePackages/checkouts/aepsdk-core-ios/AEPCore"; sourceTree = "<group>"; };
+		C62EA2E9283D1441005FFEF7 /* AEPCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = AEPCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C65307C1271456FC0076DB91 /* Adobe AEP Sample.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Adobe AEP Sample.entitlements"; sourceTree = "<group>"; };
 		C66DE3E7270F2FB700DE3AEC /* Adobe AEP Sample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Adobe AEP Sample.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C66DE3EA270F2FB700DE3AEC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -55,12 +38,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C66DE41E2712EA0B00DE3AEC /* AEPCore in Frameworks */,
-				C6EB16252815939F00F838F1 /* AEPAnalytics in Frameworks */,
-				C66DE4262712EA0B00DE3AEC /* AEPSignal in Frameworks */,
-				C66DE4242712EA0B00DE3AEC /* AEPServices in Frameworks */,
-				C66DE4202712EA0B00DE3AEC /* AEPIdentity in Frameworks */,
-				C66DE4222712EA0B00DE3AEC /* AEPLifecycle in Frameworks */,
 				615D8B2C5DE920626C776FDB /* Pods_Adobe_AEP_Sample.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -68,22 +45,31 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		238813AD90017387B8701961 /* Pods */ = {
+		154CBED594599359EA0AEB17 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				0CB296507880E123732F9406 /* Pods-Adobe AEP Sample.debug.xcconfig */,
-				019E787829F5C12575DD338C /* Pods-Adobe AEP Sample.release.xcconfig */,
+				44D1A7D26E88FDE85F873F90 /* Pods-Adobe AEP Sample.debug.xcconfig */,
+				72B64E08989485DE0B448387 /* Pods-Adobe AEP Sample.release.xcconfig */,
 			);
+			name = Pods;
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		C6261E67283CDA7400E0494F /* Packages */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Packages;
 			sourceTree = "<group>";
 		};
 		C66DE3DE270F2FB700DE3AEC = {
 			isa = PBXGroup;
 			children = (
+				C6261E67283CDA7400E0494F /* Packages */,
 				C66DE3E9270F2FB700DE3AEC /* Adobe AEP Sample */,
 				C66DE3E8270F2FB700DE3AEC /* Products */,
 				C66DE416270F429700DE3AEC /* Frameworks */,
-				238813AD90017387B8701961 /* Pods */,
+				154CBED594599359EA0AEB17 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -113,7 +99,9 @@
 		C66DE416270F429700DE3AEC /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				C62EA2E9283D1441005FFEF7 /* AEPCore.framework */,
 				DE4D277411118EAB4507CA48 /* Pods_Adobe_AEP_Sample.framework */,
+				C62EA2DA283D1334005FFEF7 /* AEPCore */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -125,26 +113,17 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = C66DE3FB270F2FBC00DE3AEC /* Build configuration list for PBXNativeTarget "Adobe AEP Sample" */;
 			buildPhases = (
-				33AB86801E684B2DB29DD115 /* [CP] Check Pods Manifest.lock */,
+				047BA65DB0B7CD6025D81666 /* [CP] Check Pods Manifest.lock */,
 				C66DE3E3270F2FB700DE3AEC /* Sources */,
 				C66DE3E4270F2FB700DE3AEC /* Frameworks */,
 				C66DE3E5270F2FB700DE3AEC /* Resources */,
-				C66DE419270F42A200DE3AEC /* Embed Frameworks */,
-				B525A4F14DCFB612C6D0E681 /* [CP] Embed Pods Frameworks */,
+				CF5787EA02A27E23731F4E6A /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			name = "Adobe AEP Sample";
-			packageProductDependencies = (
-				C66DE41D2712EA0B00DE3AEC /* AEPCore */,
-				C66DE41F2712EA0B00DE3AEC /* AEPIdentity */,
-				C66DE4212712EA0B00DE3AEC /* AEPLifecycle */,
-				C66DE4232712EA0B00DE3AEC /* AEPServices */,
-				C66DE4252712EA0B00DE3AEC /* AEPSignal */,
-				C6EB16242815939F00F838F1 /* AEPAnalytics */,
-			);
 			productName = "Adobe AEP Sample";
 			productReference = C66DE3E7270F2FB700DE3AEC /* Adobe AEP Sample.app */;
 			productType = "com.apple.product-type.application";
@@ -173,10 +152,6 @@
 				Base,
 			);
 			mainGroup = C66DE3DE270F2FB700DE3AEC;
-			packageReferences = (
-				C66DE41C2712EA0B00DE3AEC /* XCRemoteSwiftPackageReference "aepsdk-core-ios" */,
-				C6EB16232815939F00F838F1 /* XCRemoteSwiftPackageReference "aepsdk-analytics-ios" */,
-			);
 			productRefGroup = C66DE3E8270F2FB700DE3AEC /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -200,7 +175,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		33AB86801E684B2DB29DD115 /* [CP] Check Pods Manifest.lock */ = {
+		047BA65DB0B7CD6025D81666 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -222,7 +197,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		B525A4F14DCFB612C6D0E681 /* [CP] Embed Pods Frameworks */ = {
+		CF5787EA02A27E23731F4E6A /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -392,7 +367,7 @@
 		};
 		C66DE3FC270F2FBC00DE3AEC /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0CB296507880E123732F9406 /* Pods-Adobe AEP Sample.debug.xcconfig */;
+			baseConfigurationReference = 44D1A7D26E88FDE85F873F90 /* Pods-Adobe AEP Sample.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -402,6 +377,7 @@
 				DEVELOPMENT_TEAM = 6UQAD4B3U2;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Adobe AEP Sample/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = AdobeAEPSample;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -423,7 +399,7 @@
 		};
 		C66DE3FD270F2FBC00DE3AEC /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 019E787829F5C12575DD338C /* Pods-Adobe AEP Sample.release.xcconfig */;
+			baseConfigurationReference = 72B64E08989485DE0B448387 /* Pods-Adobe AEP Sample.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -433,6 +409,7 @@
 				DEVELOPMENT_TEAM = 6UQAD4B3U2;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Adobe AEP Sample/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = AdobeAEPSample;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -474,58 +451,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCRemoteSwiftPackageReference section */
-		C66DE41C2712EA0B00DE3AEC /* XCRemoteSwiftPackageReference "aepsdk-core-ios" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/adobe/aepsdk-core-ios.git";
-			requirement = {
-				kind = upToNextMinorVersion;
-				minimumVersion = 3.5.0;
-			};
-		};
-		C6EB16232815939F00F838F1 /* XCRemoteSwiftPackageReference "aepsdk-analytics-ios" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/adobe/aepsdk-analytics-ios.git";
-			requirement = {
-				kind = upToNextMinorVersion;
-				minimumVersion = 3.0.0;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		C66DE41D2712EA0B00DE3AEC /* AEPCore */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = C66DE41C2712EA0B00DE3AEC /* XCRemoteSwiftPackageReference "aepsdk-core-ios" */;
-			productName = AEPCore;
-		};
-		C66DE41F2712EA0B00DE3AEC /* AEPIdentity */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = C66DE41C2712EA0B00DE3AEC /* XCRemoteSwiftPackageReference "aepsdk-core-ios" */;
-			productName = AEPIdentity;
-		};
-		C66DE4212712EA0B00DE3AEC /* AEPLifecycle */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = C66DE41C2712EA0B00DE3AEC /* XCRemoteSwiftPackageReference "aepsdk-core-ios" */;
-			productName = AEPLifecycle;
-		};
-		C66DE4232712EA0B00DE3AEC /* AEPServices */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = C66DE41C2712EA0B00DE3AEC /* XCRemoteSwiftPackageReference "aepsdk-core-ios" */;
-			productName = AEPServices;
-		};
-		C66DE4252712EA0B00DE3AEC /* AEPSignal */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = C66DE41C2712EA0B00DE3AEC /* XCRemoteSwiftPackageReference "aepsdk-core-ios" */;
-			productName = AEPSignal;
-		};
-		C6EB16242815939F00F838F1 /* AEPAnalytics */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = C6EB16232815939F00F838F1 /* XCRemoteSwiftPackageReference "aepsdk-analytics-ios" */;
-			productName = AEPAnalytics;
-		};
-/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = C66DE3DF270F2FB700DE3AEC /* Project object */;
 }
