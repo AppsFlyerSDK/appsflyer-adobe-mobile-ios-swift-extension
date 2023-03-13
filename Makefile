@@ -16,19 +16,19 @@ clean:
 	rm -rf ./build
 
 archive: clean
-	#iOS
+	# iOS
 	@find  $(CURDIR) -name "Podfile" -type f | xargs -L 1 sed -i '' '1 s/^.*$$/platform :ios, '10.0'/g'
 	pod install 
 	xcodebuild archive -workspace AppsFlyerAdobeBinary.xcworkspace -scheme AppsFlyerAdobeAEPExtension -archivePath "./build/ios.xcarchive" -sdk iphoneos -destination="iOS" SKIP_INSTALL=NO BUILD_LIBRARIES_FOR_DISTRIBUTION=YES
 	xcodebuild archive -workspace AppsFlyerAdobeBinary.xcworkspace -scheme AppsFlyerAdobeAEPExtension -archivePath "./build/ios_simulator.xcarchive" -sdk iphonesimulator -destination="iOS Simulator" SKIP_INSTALL=NO BUILD_LIBRARIES_FOR_DISTRIBUTION=YES
 
-	#tvOS
+	# tvOS
 	@find  $(CURDIR) -name "Podfile" -type f | xargs -L 1 sed -i '' '1 s/^.*$$/platform :tvos, '10.0'/g'
 	pod install 
 	xcodebuild archive -workspace AppsFlyerAdobeBinary.xcworkspace -scheme AppsFlyerAdobeAEPExtension -archivePath "./build/tvos.xcarchive" -sdk appletvos -destination="tvOS" SKIP_INSTALL=NO BUILD_LIBRARIES_FOR_DISTRIBUTION=YES	
 	xcodebuild archive -workspace AppsFlyerAdobeBinary.xcworkspace -scheme AppsFlyerAdobeAEPExtension -archivePath "./build/tvos_simulator.xcarchive" -sdk appletvsimulator -destination="tvOS Simulator" SKIP_INSTALL=NO BUILD_LIBRARIES_FOR_DISTRIBUTION=YES
 
-	#Create
+	# Create
 	xcodebuild -create-xcframework \
 	-framework $(SIMULATOR_ARCHIVE_PATH)$(AEPRULESENGINE_TARGET_NAME).framework -debug-symbols $(SIMULATOR_ARCHIVE_DSYM_PATH)$(AEPRULESENGINE_TARGET_NAME).framework.dSYM \
 	-framework $(TVOS_SIMULATOR_ARCHIVE_PATH)$(AEPRULESENGINE_TARGET_NAME).framework -debug-symbols $(TVOS_SIMULATOR_ARCHIVE_DSYM_PATH)$(AEPRULESENGINE_TARGET_NAME).framework.dSYM \
@@ -36,5 +36,10 @@ archive: clean
 	-framework $(TVOS_ARCHIVE_PATH)$(AEPRULESENGINE_TARGET_NAME).framework -debug-symbols $(TVOS_ARCHIVE_DSYM_PATH)$(AEPRULESENGINE_TARGET_NAME).framework.dSYM \
 	-output ./build/$(AEPRULESENGINE_TARGET_NAME).xcframework
 
-	#Restore Podfile
+	# Restore Podfile
 	@find  $(CURDIR) -name "Podfile" -type f | xargs -L 1 sed -i '' '1 s/^.*$$/platform :ios, '10.0'/g'
+
+	# ISSUE: https://developer.apple.com/forums/thread/123253
+	# https://github.com/apple/swift/issues/43510
+	# WORKAROUND APPLIED:
+	@find  $(CURDIR) -name "*.swiftinterface" -exec sed -i -e 's/AppsFlyerLib\.//g' {} \;
