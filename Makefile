@@ -11,6 +11,9 @@ TVOS_ARCHIVE_PATH = ./build/tvos.xcarchive/Products/Library/Frameworks/
 IOS_ARCHIVE_DSYM_PATH = $(CURR_DIR)/build/ios.xcarchive/dSYMs/
 TVOS_ARCHIVE_DSYM_PATH = $(CURR_DIR)/build/tvos.xcarchive/dSYMs/
 
+# .rb
+BUILD_DIR   = $(CURDIR)/build
+PRODUCT_DIR = $(CURDIR)/build
 
 clean:
 	rm -rf ./build
@@ -34,7 +37,7 @@ archive: clean
 	-framework $(TVOS_SIMULATOR_ARCHIVE_PATH)$(AEPRULESENGINE_TARGET_NAME).framework -debug-symbols $(TVOS_SIMULATOR_ARCHIVE_DSYM_PATH)$(AEPRULESENGINE_TARGET_NAME).framework.dSYM \
 	-framework $(IOS_ARCHIVE_PATH)$(AEPRULESENGINE_TARGET_NAME).framework -debug-symbols $(IOS_ARCHIVE_DSYM_PATH)$(AEPRULESENGINE_TARGET_NAME).framework.dSYM \
 	-framework $(TVOS_ARCHIVE_PATH)$(AEPRULESENGINE_TARGET_NAME).framework -debug-symbols $(TVOS_ARCHIVE_DSYM_PATH)$(AEPRULESENGINE_TARGET_NAME).framework.dSYM \
-	-output ./build/$(AEPRULESENGINE_TARGET_NAME).xcframework
+	-output ./build/bin/$(AEPRULESENGINE_TARGET_NAME).xcframework
 
 	# Restore Podfile
 	@find  $(CURDIR) -name "Podfile" -type f | xargs -L 1 sed -i '' '1 s/^.*$$/platform :ios, '10.0'/g'
@@ -43,3 +46,7 @@ archive: clean
 	# https://github.com/apple/swift/issues/43510
 	# WORKAROUND APPLIED:
 	@find  $(CURDIR) -name "*.swiftinterface" -exec sed -i -e 's/AppsFlyerLib\.//g' {} \;
+
+dmg:
+	@echo "** Creating disk image..."
+	scripts/makedmg.rb $(PRODUCT_DIR) $(BUILD_DIR)
