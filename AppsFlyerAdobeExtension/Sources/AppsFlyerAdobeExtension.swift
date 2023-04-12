@@ -11,6 +11,8 @@ import AEPIdentity
 import AppsFlyerLib
 import UIKit
 
+let kAppsFlyerAdobeExtensionVersion = "6.10.1"
+
 @objc(AppsFlyerAdobeExtension)
 public class AppsFlyerAdobeExtension: NSObject, Extension {
   // MARK: - Adobe Extension properties
@@ -204,6 +206,7 @@ extension AppsFlyerAdobeExtension {
         logger("not waiting for ECID")
       }
       let af = AppsFlyerLib.shared()
+      af.setPluginInfo(plugin: .adobeSwiftAEP, version: kAppsFlyerAdobeExtensionVersion, additionalParams: nil)
       af.appsFlyerDevKey = devKey
       af.appleAppID = appId
       af.isDebug = isDebug
