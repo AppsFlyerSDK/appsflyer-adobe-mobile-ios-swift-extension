@@ -9,7 +9,7 @@ import Foundation
 enum AppsFlyerConstants {
   static let EXTENSION_NAME = "com.appsflyer.adobeextension" 
   static let FRIENDLY_NAME = "AppsFlyerAdobeExtension"
-  static let EXTENSION_VERSION = "6.9.1"
+  static let EXTENSION_VERSION = "6.12.0"
   static let EVENT_GETTER_RESPONSE_DATA_KEY = "getterdata"
   static let EVENT_SETTER_REQUEST_DATA_KEY = "setterdata"
   static let AF_BRIDGE_SET = "bridge is set"
