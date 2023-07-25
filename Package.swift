@@ -17,7 +17,7 @@ let package = Package(
     dependencies: [
         // Dependencies declare other packages that this package depends on.
         // .package(url: /* package url */, from: "1.0.0"),
-        .package(name: "AppsFlyerLib" , url: "https://github.com/AppsFlyerSDK/AppsFlyerFramework-Static.git",  .exact("6.12.0")),
+        .package(name: "AppsFlyerLib", url: "https://github.com/AppsFlyerSDK/AppsFlyerFramework-Static.git",  .exact("6.12.0")),
         .package(url: "https://github.com/adobe/aepsdk-core-ios.git", from: "3.0.0")
 
 
@@ -30,7 +30,7 @@ let package = Package(
             dependencies: [ 
                             .product(name: "AEPIdentity", package: "aepsdk-core-ios"),
                             .product(name: "AEPCore", package: "aepsdk-core-ios"),
-                .product(name: "AppsFlyerLib", package: "AppsFlyerLib"),],
+                            .product(name: "AppsFlyerLib-Static", package: "AppsFlyerLib"),],
         path: "AppsFlyerAdobeExtension/Sources/"
 ),
     
