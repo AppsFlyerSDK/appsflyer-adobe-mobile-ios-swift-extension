@@ -15,6 +15,7 @@ import UIKit
 public class AppsFlyerAdobeExtension: NSObject, Extension {
   // MARK: - Adobe Extension properties
   public static var manual = false
+  private static var manualOverrider = false
   public static var extensionVersion = AppsFlyerConstants.EXTENSION_VERSION
   public var name: String = AppsFlyerConstants.EXTENSION_NAME
   public var friendlyName: String = AppsFlyerConstants.FRIENDLY_NAME
@@ -81,6 +82,14 @@ public class AppsFlyerAdobeExtension: NSObject, Extension {
   public func readyForEvent(_ event: Event) -> Bool {
     return getSharedState(extensionName: AppsFlyerConstants.SharedStateKeys.CONFIGURATION, event: event)?.status == .set
   }
+}
+
+// MARK: - public function
+extension AppsFlyerAdobeExtension{
+    public static func startSDK(){
+        AppsFlyerLib.shared().start()
+        AppsFlyerAdobeExtension.manualOverrider = true
+    }
 }
 
 // MARK: - Event Listeners
@@ -353,7 +362,10 @@ extension AppsFlyerAdobeExtension {
     }
     return nil
   }
-  
+    
+    private func getManualStatus() -> Bool{
+        return !AppsFlyerAdobeExtension.manual || AppsFlyerAdobeExtension.manualOverrider
+    }
 }
 
 // MARK: Notifications implementetions 
@@ -364,7 +376,7 @@ extension AppsFlyerAdobeExtension {
     logger("appDidBecomeActive")
     if didReceiveConfigurations && mayStartSDK {
       NotificationCenter.default.post(name: Notification.Name.appsflyerBridge, object: self)
-        if !AppsFlyerAdobeExtension.manual{
+        if getManualStatus(){
             AppsFlyerLib.shared().start()
             logger("AF start")
             self.didStart = true
