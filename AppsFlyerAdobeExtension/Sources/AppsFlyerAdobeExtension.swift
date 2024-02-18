@@ -14,6 +14,7 @@ import UIKit
 @objc(AppsFlyerAdobeExtension)
 public class AppsFlyerAdobeExtension: NSObject, Extension {
   // MARK: - Adobe Extension properties
+  public static var manual = false
   public static var extensionVersion = AppsFlyerConstants.EXTENSION_VERSION
   public var name: String = AppsFlyerConstants.EXTENSION_NAME
   public var friendlyName: String = AppsFlyerConstants.FRIENDLY_NAME
@@ -25,7 +26,7 @@ public class AppsFlyerAdobeExtension: NSObject, Extension {
   // types of event that should be sent to Adobe Analytics
   private var eventSettings : String?
   private var didReceiveConfigurations = false
-  private var didInit = false
+  private var didStart = false
   // should send onConversionDataSuccess result
   // to Adobe Analytics
   private var logAttributionData = false
@@ -236,11 +237,10 @@ extension AppsFlyerAdobeExtension {
       self.didReceiveConfigurations = true
       AppsFlyerAttribution.shared.bridgReady = true
       
-      if !self.didInit {
+      if !self.didStart {
         // notify bridge is ready. Now able to resolve onelinks
         NotificationCenter.default.post(name: Notification.Name.appsflyerBridge, object: self)
         self.appDidBecomeActive()
-        self.didInit = true
       } else {
         logger("rejecting re-init of previously initialized tracker")
       }
@@ -363,10 +363,12 @@ extension AppsFlyerAdobeExtension {
   @objc private func appDidBecomeActive() {
     logger("appDidBecomeActive")
     if didReceiveConfigurations && mayStartSDK {
-      logger("AF start")
       NotificationCenter.default.post(name: Notification.Name.appsflyerBridge, object: self)
-      AppsFlyerLib.shared().start()
-      self.didInit = true
+        if !AppsFlyerAdobeExtension.manual{
+            AppsFlyerLib.shared().start()
+            logger("AF start")
+            self.didStart = true
+        }
     }
   }
   
