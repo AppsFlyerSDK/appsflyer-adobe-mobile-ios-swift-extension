@@ -14,7 +14,7 @@ import UIKit
 @objc(AppsFlyerAdobeExtension)
 public class AppsFlyerAdobeExtension: NSObject, Extension {
   // MARK: - Adobe Extension properties
-  public static var manual = false
+  private static var manual = false
   private static var manualOverrider = false
   public static var extensionVersion = AppsFlyerConstants.EXTENSION_VERSION
   public var name: String = AppsFlyerConstants.EXTENSION_NAME
@@ -89,6 +89,10 @@ extension AppsFlyerAdobeExtension{
     public static func startSDK(){
         AppsFlyerLib.shared().start()
         AppsFlyerAdobeExtension.manualOverrider = true
+    }
+    
+    public static func setManualMode(b: Bool){
+        AppsFlyerAdobeExtension.manual = b
     }
 }
 
