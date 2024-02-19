@@ -8,7 +8,7 @@ target 'Adobe AEP Sample' do
   pod 'AEPSignal'
   pod 'AEPMobileServices'
   pod 'AEPAnalytics' 
-  pod 'AppsFlyerAdobeAEPExtension', :path => '../'
+  pod 'AppsFlyerAdobeAEPExtension', '6.13.0'
   pod 'AEPCore'
 
 end
