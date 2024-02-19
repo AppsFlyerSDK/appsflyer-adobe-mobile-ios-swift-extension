@@ -13,7 +13,8 @@ A CMP compatible with TCF v2.2 collects DMA consent data and stores it in <code>
   <li> Initialize <code>MobileCore</code>. 
   <li> In the <code>applicationDidBecomeActive</code> lifecycle method, use the CMP to decide if you need the consent dialog in the current session to acquire the consent data. If you need the consent dialog move to step 4; otherwise move to step 5.
   <li> Get confirmation from the CMP that the user has made their consent decision and the data is available in <code>NSUserDefaults</code>.
-  <li> Call start() to the SDK and also set the manual mode to <code>false</code>.
+  <li> Call <code>start()</code> to the SDK.
+  <li> Set manual mode to <code>false</code>.
 </ol>
 
 
@@ -56,11 +57,13 @@ If your app does not use a CMP compatible with TCF v2.2, use the SDK API detaile
           - <code>forGDPRUserWithHasConsentForDataUsage</code>- Indicates whether the user has consented to use their data for advertising purposes.
           - <code>hasConsentForAdsPersonalization</code>- Indicates whether the user has consented to use their data for personalized advertising.
         <li> Call <code>AppsFlyerLib.shared().setConsentData(AppsFlyerConsent(forGDPRUserWithHasConsentForDataUsage: Bool, hasConsentForAdsPersonalization: Bool))</code>. 
-        <li> Call start() to the SDK and also set the manual mode to <code>false</code>..
+        <li> Call <code>start()</code> to the SDK.
+        <li> Set manual mode to <code>false</code>.
       </ol><br>
     - If GDPR doesn’t apply to the user perform the following:
       <ol>
         <li> Call <code>AppsFlyerLib.shared().setConsentData(AppsFlyerConsent(nonGDPRUser: ()))</code>.
-        <li> Call start() to the SDK and also set the manual mode to <code>false</code>.
+        <li> Call <code>start()</code> to the SDK.
+        <li> Set manual mode to <code>false</code>.
       </ol>
 </ol>
