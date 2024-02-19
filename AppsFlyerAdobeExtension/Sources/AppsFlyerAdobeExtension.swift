@@ -14,6 +14,7 @@ import UIKit
 @objc(AppsFlyerAdobeExtension)
 public class AppsFlyerAdobeExtension: NSObject, Extension {
   // MARK: - Adobe Extension properties
+  public static var manual = false
   public static var extensionVersion = AppsFlyerConstants.EXTENSION_VERSION
   public var name: String = AppsFlyerConstants.EXTENSION_NAME
   public var friendlyName: String = AppsFlyerConstants.FRIENDLY_NAME
@@ -353,7 +354,6 @@ extension AppsFlyerAdobeExtension {
     }
     return nil
   }
-  
 }
 
 // MARK: Notifications implementetions 
@@ -363,10 +363,11 @@ extension AppsFlyerAdobeExtension {
   @objc private func appDidBecomeActive() {
     logger("appDidBecomeActive")
     if didReceiveConfigurations && mayStartSDK {
-      logger("AF start")
       NotificationCenter.default.post(name: Notification.Name.appsflyerBridge, object: self)
-      AppsFlyerLib.shared().start()
-      self.didInit = true
+        if !AppsFlyerAdobeExtension.manual{
+            AppsFlyerLib.shared().start()
+            logger("AF start")
+        }
     }
   }
   
