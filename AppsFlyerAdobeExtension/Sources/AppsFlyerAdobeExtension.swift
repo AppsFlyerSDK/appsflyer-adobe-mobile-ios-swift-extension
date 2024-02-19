@@ -241,7 +241,7 @@ extension AppsFlyerAdobeExtension {
         // notify bridge is ready. Now able to resolve onelinks
         NotificationCenter.default.post(name: Notification.Name.appsflyerBridge, object: self)
         self.appDidBecomeActive()
-          didInit = true
+        self.didInit = true
       } else {
         logger("rejecting re-init of previously initialized tracker")
       }
