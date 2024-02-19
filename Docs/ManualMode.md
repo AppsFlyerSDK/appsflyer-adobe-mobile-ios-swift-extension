@@ -8,9 +8,11 @@ If you are using CMP to collect consent data this feature is needed. See explana
 ```swift
 AppsFlyerAdobeExtension.manual = true;
 ``` 
-Please look at the example below to see how to start SDK once you want.</br>Keep in mind you shouldn't put the `start()` on a lifecycle method.
+Please look at the example below to see how to start SDK once you want.</br>
+Keep in mind you shouldn't put the `start()` on a lifecycle method.</br>
 To start the AppsFlyer SDK, use the `start()` API, like the following :  
 ```swift
 AppsFlyerLib.shared().start()
 AppsFlyerAdobeExtension.manual = false
 ```   
+You need to end the manual mode. This will  tell the Extension to call <code>start()</code> from this point.
