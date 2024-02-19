@@ -14,8 +14,7 @@ import UIKit
 @objc(AppsFlyerAdobeExtension)
 public class AppsFlyerAdobeExtension: NSObject, Extension {
   // MARK: - Adobe Extension properties
-  private static var manual = false
-  private static var manualOverrider = false
+  public static var manual = false
   public static var extensionVersion = AppsFlyerConstants.EXTENSION_VERSION
   public var name: String = AppsFlyerConstants.EXTENSION_NAME
   public var friendlyName: String = AppsFlyerConstants.FRIENDLY_NAME
@@ -27,7 +26,7 @@ public class AppsFlyerAdobeExtension: NSObject, Extension {
   // types of event that should be sent to Adobe Analytics
   private var eventSettings : String?
   private var didReceiveConfigurations = false
-  private var didStart = false
+  private var didInit = false
   // should send onConversionDataSuccess result
   // to Adobe Analytics
   private var logAttributionData = false
@@ -82,18 +81,6 @@ public class AppsFlyerAdobeExtension: NSObject, Extension {
   public func readyForEvent(_ event: Event) -> Bool {
     return getSharedState(extensionName: AppsFlyerConstants.SharedStateKeys.CONFIGURATION, event: event)?.status == .set
   }
-}
-
-// MARK: - public function
-extension AppsFlyerAdobeExtension{
-    public static func startSDK(){
-        AppsFlyerLib.shared().start()
-        AppsFlyerAdobeExtension.manualOverrider = true
-    }
-    
-    public static func setManualMode(b: Bool){
-        AppsFlyerAdobeExtension.manual = b
-    }
 }
 
 // MARK: - Event Listeners
@@ -250,10 +237,11 @@ extension AppsFlyerAdobeExtension {
       self.didReceiveConfigurations = true
       AppsFlyerAttribution.shared.bridgReady = true
       
-      if !self.didStart {
+      if !self.didInit {
         // notify bridge is ready. Now able to resolve onelinks
         NotificationCenter.default.post(name: Notification.Name.appsflyerBridge, object: self)
         self.appDidBecomeActive()
+          didInit = true
       } else {
         logger("rejecting re-init of previously initialized tracker")
       }
@@ -366,10 +354,6 @@ extension AppsFlyerAdobeExtension {
     }
     return nil
   }
-    
-    private func getManualStatus() -> Bool{
-        return !AppsFlyerAdobeExtension.manual || AppsFlyerAdobeExtension.manualOverrider
-    }
 }
 
 // MARK: Notifications implementetions 
@@ -380,10 +364,9 @@ extension AppsFlyerAdobeExtension {
     logger("appDidBecomeActive")
     if didReceiveConfigurations && mayStartSDK {
       NotificationCenter.default.post(name: Notification.Name.appsflyerBridge, object: self)
-        if getManualStatus(){
+        if !AppsFlyerAdobeExtension.manual{
             AppsFlyerLib.shared().start()
             logger("AF start")
-            self.didStart = true
         }
     }
   }
