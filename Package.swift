@@ -32,7 +32,6 @@ let package = Package(
                             .product(name: "AEPCore", package: "aepsdk-core-ios"),
                             .product(name: "AEPLifecycle", package: "aepsdk-core-ios"),
                             .product(name: "AEPSignal", package: "aepsdk-core-ios"),
-                            .product(name: "AEPAnalytics", package: "aepsdk-core-ios"),
                             .product(name: "AEPMobileServices", package: "aepsdk-core-ios"),
                             .product(name: "AppsFlyerLib-Static", package: "AppsFlyerFramework-Static")],
         path: "AppsFlyerAdobeExtension/Sources/"
