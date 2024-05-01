@@ -5,8 +5,8 @@
 #  To learn more about Podspec attributes see https://guides.cocoapods.org/syntax/podspec.html
 #  To see working Podspecs in the CocoaPods repo see https://github.com/CocoaPods/Specs/
 #
-version_appsflyerLib = '6.13.1'
-version_plugin = '6.13.1'
+version_appsflyerLib = '6.14.3'
+version_plugin = '6.14.3'
    
 Pod::Spec.new do |s|
   s.name             = 'AppsFlyerAdobeAEPExtension'
@@ -21,7 +21,7 @@ AppsFlyer iOS SDK Extension for Adobe Mobile SDK.
   s.author           = { 'AppsFlyer' => 'paz.lavi@appsflyer.com' }
   s.source           = { :git => 'https://github.com/AppsFlyerSDK/appsflyer-adobe-mobile-ios-swift-extension.git', :tag => s.version.to_s }
 
-  s.ios.deployment_target = '10.0'
+  s.ios.deployment_target = '12.0'
   s.source_files = 'AppsFlyerAdobeExtension/Sources/**/*.{swift,h,m}'
   s.static_framework = true
   s.swift_version = "4.2"
