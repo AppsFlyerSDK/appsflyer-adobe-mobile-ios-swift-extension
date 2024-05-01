@@ -6,7 +6,7 @@ import PackageDescription
 let package = Package(
     name: "AppsFlyerAdobeAEPExtension",
     platforms: [
-            .iOS(.v10)
+            .iOS(.v12)
         ],
     products: [
         // Products define the executables and libraries a package produces, and make them visible to other packages.
@@ -17,8 +17,8 @@ let package = Package(
     dependencies: [
         // Dependencies declare other packages that this package depends on.
         // .package(url: /* package url */, from: "1.0.0"),
-        .package(url: "https://github.com/AppsFlyerSDK/AppsFlyerFramework-Static.git",  .exact("6.13.1")),
-        .package(url: "https://github.com/adobe/aepsdk-core-ios.git", from: "3.0.0")
+        .package(url: "https://github.com/AppsFlyerSDK/AppsFlyerFramework-Static.git",  .exact("6.14.3")),
+        .package(url: "https://github.com/adobe/aepsdk-core-ios.git", from: "5.0.0")
 
 
     ],

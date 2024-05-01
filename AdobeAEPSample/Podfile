@@ -1,4 +1,4 @@
-platform :ios, 10.0
+platform :ios, 12.0
 
 target 'Adobe AEP Sample' do
   use_frameworks!
@@ -8,7 +8,7 @@ target 'Adobe AEP Sample' do
   pod 'AEPSignal'
   pod 'AEPMobileServices'
   pod 'AEPAnalytics' 
-  pod 'AppsFlyerAdobeAEPExtension', "6.13.1"
+  pod 'AppsFlyerAdobeAEPExtension', :path => '/Users/morisgateno/Desktop/AppsFlyer/projects/Adobe/appsflyer-adobe-mobile-ios-swift-extension/AppsFlyerAdobeAEPExtension.podspec'
   pod 'AEPCore'
 
 end
