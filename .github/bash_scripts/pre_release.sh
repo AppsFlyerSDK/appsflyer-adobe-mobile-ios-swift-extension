@@ -10,7 +10,7 @@ mv AppsFlyerAdobeAEPExtension.podspec AppsFlyerAdobeAEPExtension-qa.podspec
 
 sed -r -i '' "s/(.*AppsFlyerLib.*)([0-9]+\.[0-9]+\.[0-9]+)(.*)/\1$appsflyerLibVersion\3/g" Package.swift
 
-sed -r -i '' "s/(.*pod \'AppsFlyerAdobeAEPExtension)\'(.*\'[0-9]+\.[0-9]+\.[0-9]+\')/\1\',\'$rcVersion\'/g" AdobeAEPSample/Podfile
+sed -r -i '' "s/(.*pod \'AppsFlyerAdobeAEPExtension)\'(.*\'[0-9]+\.[0-9]+\.[0-9]+\')/\1-qa\',\'$rcVersion\'/g" AdobeAEPSample/Podfile
 
 sed -r -i '' "s/(- iOS AppsFlyer SDK .*)([0-9]+\.[0-9]+\\.[0-9]+)(.*)/\1$appsflyerLibVersion\3/g" README.md
 
