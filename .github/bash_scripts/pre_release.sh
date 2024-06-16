@@ -5,7 +5,7 @@ rcVersion=$2
 
 sed -i '' "s/version_appsflyerLib = \'.*\'/version_appsflyerLib = \'$appsflyerLibVersion\'/g" AppsFlyerAdobeAEPExtension.podspec
 sed -i '' "s/version_plugin = \'.*\'/version_plugin = \'$rcVersion\'/g" AppsFlyerAdobeAEPExtension.podspec
-sed -i '' "s/s.name             = \"AppsFlyerAdobeAEPExtension\"/s.name             = \"AppsFlyerAdobeAEPExtension-qa\"/g" AppsFlyerAdobeAEPExtension.podspec
+sed -i '' "s/s.name             = \'AppsFlyerAdobeAEPExtension\'/s.name             = \'AppsFlyerAdobeAEPExtension-qa\'/g" AppsFlyerAdobeAEPExtension.podspec
 mv AppsFlyerAdobeAEPExtension.podspec AppsFlyerAdobeAEPExtension-qa.podspec
 
 sed -r -i '' "s/(.*AppsFlyerLib.*)([0-9]+\.[0-9]+\.[0-9]+)(.*)/\1$appsflyerLibVersion\3/g" Package.swift
