@@ -5,7 +5,7 @@ on:
     types:
       - opened
     branches:
-      - 'master'
+      - 'main'
 
 jobs:
   Prepare-Plugin-For-Production:
