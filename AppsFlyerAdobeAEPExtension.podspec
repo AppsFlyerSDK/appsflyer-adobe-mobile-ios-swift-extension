@@ -6,10 +6,10 @@
 #  To see working Podspecs in the CocoaPods repo see https://github.com/CocoaPods/Specs/
 #
 version_appsflyerLib = '6.15.0'
-version_plugin = '6.15.0-rc1'
+version_plugin = '6.15.0'
    
 Pod::Spec.new do |s|
-  s.name             = 'AppsFlyerAdobeAEPExtension-qa'
+  s.name             = 'AppsFlyerAdobeAEPExtension'
   s.version          = version_plugin
   s.summary          = 'AppsFlyer iOS SDK Extension for Adobe Mobile SDK'
   s.description      = <<-DESC
