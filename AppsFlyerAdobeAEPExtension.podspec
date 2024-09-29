@@ -31,5 +31,7 @@ AppsFlyer iOS SDK Extension for Adobe Mobile SDK.
   s.dependency 'AppsFlyerFramework',version_appsflyerLib
   s.dependency 'AEPCore'
   s.dependency 'AEPIdentity'
+  s.dependency 'AEPEdgeIdentity'
+  s.dependency 'AEPEdge'
 
 end

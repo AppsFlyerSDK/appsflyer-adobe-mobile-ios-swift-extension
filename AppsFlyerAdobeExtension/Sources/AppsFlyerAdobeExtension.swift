@@ -10,6 +10,7 @@ import AEPCore
 import AEPIdentity
 import AppsFlyerLib
 import UIKit
+import AEPEdge
 
 @objc(AppsFlyerAdobeExtension)
 public class AppsFlyerAdobeExtension: NSObject, Extension {
@@ -17,16 +18,7 @@ public class AppsFlyerAdobeExtension: NSObject, Extension {
   public static var manual = false
   public static var extensionVersion = AppsFlyerConstants.EXTENSION_VERSION
   public var name: String = AppsFlyerConstants.EXTENSION_NAME
-  public var friendlyName: String = AppsFlyerConstants.FRIENDLY_NAME
-  public var metadata: [String : String]?
-  public var runtime: ExtensionRuntime
-  
-  // MARK: AppsFlyer properties
-  private static var gcd : [AnyHashable : Any]?
-  // types of event that should be sent to Adobe Analytics
-  private var eventSettings : String?
-  private var didReceiveConfigurations = false
-  private var didInit = false
+    private var didInit = false
   // should send onConversionDataSuccess result
   // to Adobe Analytics
   private var logAttributionData = false
@@ -37,6 +29,15 @@ public class AppsFlyerAdobeExtension: NSObject, Extension {
   private var mayStartSDK = true
   
   // MARK: AppsFlyer Delegates
+    public var friendlyName: String = AppsFlyerConstants.FRIENDLY_NAME
+      public var metadata: [String : String]?
+      public var runtime: ExtensionRuntime
+      
+      // MARK: AppsFlyer properties
+      private static var gcd : [AnyHashable : Any]?
+      // types of event that should be sent to Adobe Analytics
+      private var eventSettings : String?
+      private var didReceiveConfigurations = false
   // GCD + OAOA
   public static var delegate : AppsFlyerLibDelegate? = nil
   // UDL
@@ -65,7 +66,9 @@ public class AppsFlyerAdobeExtension: NSObject, Extension {
     // Listener for Analytics Event binding
     // requestContentListener is invoked whenever the `EventHub` dispatches an event with type genericTrack and source request content
     self.registerListener(type: EventType.genericTrack, source: EventSource.requestContent, listener: requestContentListener(event:))
-    
+    // Listener for Edge Events
+    // requestContentListener is invoked whenever the `EventHub` dispatches an event with type Edge and source request content
+    self.registerListener(type: EventType.edge, source: EventSource.requestContent, listener: requestContentListener(event:))
   }
   
   /// Invoked when the AppsFlyerAdobeExtension extension has been unregistered by the `EventHub`.
@@ -147,12 +150,17 @@ extension AppsFlyerAdobeExtension {
       logger("Discarding event binding for AppsFlyer Attribution Data event")
       return
     }
+      
+      if event.type == EventType.edge{
+          AppsFlyerLib.shared().logEvent(event.name, withValues: ["xdm" : eventData])
+          return
+      }
     
     let revenue = extractRevenue(nestedData)
     let currency = extractCurrency(nestedData)
     
     var afPayloadProperties : [String : Any]? = nil
-    
+      
     if let revenue = revenue {
       afPayloadProperties = nestedData
       afPayloadProperties?[AppsFlyerConstants.AF_REVENUE] = revenue
@@ -392,6 +400,11 @@ extension AppsFlyerAdobeExtension : DeepLinkDelegate {
         // send `clickEvent` to Adobe Analytics
         MobileCore.track(action: AppsFlyerConstants.APPSFLYER_ENGAGEMENT_DATA, data: setKeyPrefix(oldDictionary:
                                                                                                     setKeyPrefixDeepLinking(attributionData: dic)))
+          let experienceEvent = ExperienceEvent(xdm: setKeyPrefix(oldDictionary:
+                                                                    setKeyPrefixDeepLinking(attributionData: dic)), data: [AppsFlyerConstants.ACTION_KEY: AppsFlyerConstants.APPSFLYER_ENGAGEMENT_DATA])
+          Edge.sendEvent(experienceEvent: experienceEvent) { handle in
+              print(handle.description)
+          }
       }
     }
     AppsFlyerAdobeExtension.deepLinkDelegate?.didResolveDeepLink?(result)
@@ -414,6 +427,10 @@ extension AppsFlyerAdobeExtension : AppsFlyerLibDelegate {
         }
         // send `conversionInfo` to Adobe Analytics
         MobileCore.track(action: AppsFlyerConstants.APPSFLYER_ATTRIBUTION_DATA , data: setKeyPrefix(oldDictionary: appendedInstallData))
+          let experienceEvent = ExperienceEvent(xdm: setKeyPrefix(oldDictionary: appendedInstallData), data: [AppsFlyerConstants.ACTION_KEY: AppsFlyerConstants.APPSFLYER_ATTRIBUTION_DATA])
+          Edge.sendEvent(experienceEvent: experienceEvent) { handle in
+              print(handle.description)
+          }
       }
     }
     AppsFlyerAdobeExtension.gcd = appendedInstallData
@@ -433,6 +450,11 @@ extension AppsFlyerAdobeExtension : AppsFlyerLibDelegate {
       // send `attributionData` to Adobe Analytics
       MobileCore.track(action: AppsFlyerConstants.APPSFLYER_ENGAGEMENT_DATA , data: setKeyPrefix(oldDictionary:
                                                                                                   setKeyPrefixDeepLinking(attributionData: newAttributionData)))
+        let experienceEvent = ExperienceEvent(xdm: setKeyPrefix(oldDictionary:
+                                                                    setKeyPrefixDeepLinking(attributionData: newAttributionData)), data: [AppsFlyerConstants.ACTION_KEY: AppsFlyerConstants.APPSFLYER_ENGAGEMENT_DATA])
+        Edge.sendEvent(experienceEvent: experienceEvent) { handle in
+            print(handle.description)
+        }
     }
     if ecid != nil {
       appendedAttributionData[AppsFlyerConstants.ECID] = self.ecid!
