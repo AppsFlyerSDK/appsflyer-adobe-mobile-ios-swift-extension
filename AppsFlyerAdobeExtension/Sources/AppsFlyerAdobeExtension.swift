@@ -152,7 +152,7 @@ extension AppsFlyerAdobeExtension {
     }
       
       if event.type == EventType.edge{
-          AppsFlyerLib.shared().logEvent(event.name, withValues: ["xdm" : eventData])
+          AppsFlyerLib.shared().logEvent(event.name, withValues: eventData)
           return
       }
     
