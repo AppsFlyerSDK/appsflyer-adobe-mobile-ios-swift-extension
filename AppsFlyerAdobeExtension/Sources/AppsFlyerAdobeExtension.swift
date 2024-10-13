@@ -132,6 +132,12 @@ extension AppsFlyerAdobeExtension {
       logger("error retreiving event binding state")
       return
     }
+
+    if event.type == EventType.edge{
+        handleEdgeEvent(event: event)
+        return
+    }
+      
     // Bools
     var isRevenueEvent = false
     let bindActionEvents = (self.eventSettings == AppsFlyerConstants.ACTIONS || self.eventSettings == AppsFlyerConstants.ALL)
@@ -150,11 +156,6 @@ extension AppsFlyerAdobeExtension {
       logger("Discarding event binding for AppsFlyer Attribution Data event")
       return
     }
-      
-      if event.type == EventType.edge{
-          AppsFlyerLib.shared().logEvent(event.name, withValues: eventData)
-          return
-      }
     
     let revenue = extractRevenue(nestedData)
     let currency = extractCurrency(nestedData)
@@ -182,6 +183,45 @@ extension AppsFlyerAdobeExtension {
       }
     }
   }
+    
+    fileprivate func dictionaryManipulationForEdgeEvent(_ dict: [String : Any], _ eventName: inout String, _ eventNewData: inout [String : Any]) {
+        for (key, value) in dict {
+            if key == "eventName" {
+                if let eventNameValue = value as? String{
+                    eventName = eventNameValue
+                }
+            } else if key == AppsFlyerConstants.CURRENCY_KEY {
+                eventNewData[AppsFlyerConstants.AF_CURRENCY] = value
+            } else if key == AppsFlyerConstants.REVENUE_KEY {
+                eventNewData[AppsFlyerConstants.AF_REVENUE] = value
+            } else {
+                eventNewData[key] = value
+            }
+        }
+    }
+    
+    private func handleEdgeEvent(event: Event){
+        guard let eventData = event.data else {
+            logger("Couldn't extract event data")
+            return
+        }
+        var eventName = ""
+        if let dataDictionary = eventData["data"] as? [String: Any],
+           let eventAction = dataDictionary[AppsFlyerConstants.ACTION_KEY] as? String{
+            if eventAction == AppsFlyerConstants.APPSFLYER_ATTRIBUTION_DATA || eventAction == AppsFlyerConstants.APPSFLYER_ENGAGEMENT_DATA{
+                logger("Discarding event binding for AppsFlyer Attribution Data event")
+                return
+            }
+        }
+        var eventNewData: [String: Any] = [:]
+        if let dict = eventData["xdm"] as? [String: Any] {
+            dictionaryManipulationForEdgeEvent(dict, &eventName, &eventNewData)
+        }
+        if let dict = eventData["data"] as? [String: Any] {
+            dictionaryManipulationForEdgeEvent(dict, &eventName, &eventNewData)
+        }
+        AppsFlyerLib.shared().logEvent(eventName, withValues: eventNewData)
+    }
 }
 
 // MARK: internal methods
