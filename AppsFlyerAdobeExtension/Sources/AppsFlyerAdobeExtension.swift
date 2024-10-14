@@ -136,67 +136,55 @@ extension AppsFlyerAdobeExtension {
     if event.type == EventType.edge{
         handleEdgeEvent(event: event)
         return
-    }
-      
-    // Bools
-    var isRevenueEvent = false
-    let bindActionEvents = (self.eventSettings == AppsFlyerConstants.ACTIONS || self.eventSettings == AppsFlyerConstants.ALL)
-    let bindStateEvents = (self.eventSettings == AppsFlyerConstants.STATES || self.eventSettings == AppsFlyerConstants.ALL)
-    
-    print(event.description)
-    guard let eventData = event.data else {
-      logger("Couldn't extract event data")
-      return
-    }
-    let nestedData = eventData[AppsFlyerConstants.CONTEXT_DATA_KEY] as? [String : Any]
-    let eventState = eventData[AppsFlyerConstants.STATE_KEY] as? String
-    let eventAction = eventData[AppsFlyerConstants.ACTION_KEY] as? String
-    
-    if eventAction == AppsFlyerConstants.APPSFLYER_ATTRIBUTION_DATA || eventAction == AppsFlyerConstants.APPSFLYER_ENGAGEMENT_DATA {
-      logger("Discarding event binding for AppsFlyer Attribution Data event")
-      return
-    }
-    
-    let revenue = extractRevenue(nestedData)
-    let currency = extractCurrency(nestedData)
-    
-    var afPayloadProperties : [String : Any]? = nil
-      
-    if let revenue = revenue {
-      afPayloadProperties = nestedData
-      afPayloadProperties?[AppsFlyerConstants.AF_REVENUE] = revenue
-      afPayloadProperties?[AppsFlyerConstants.AF_CURRENCY] = currency
-      isRevenueEvent = true
-    }
-    if let eventAction = eventAction, bindActionEvents && eventAction.count != 0 {
-      if isRevenueEvent && afPayloadProperties != nil {
-        AppsFlyerLib.shared().logEvent(name: eventAction, values: afPayloadProperties!)
-      } else {
-        AppsFlyerLib.shared().logEvent(name: eventAction, values: nestedData)
-      }
-    }
-    if let eventState = eventState, bindStateEvents && eventState.count != 0 {
-      if isRevenueEvent && afPayloadProperties != nil {
-        AppsFlyerLib.shared().logEvent(name: eventState, values: afPayloadProperties!)
-      } else {
-        AppsFlyerLib.shared().logEvent(name: eventState, values: nestedData)
-      }
+    } else {
+        handleGenericEvent(event: event)
     }
   }
     
-    fileprivate func dictionaryManipulationForEdgeEvent(_ dict: [String : Any], _ eventName: inout String, _ eventNewData: inout [String : Any]) {
-        for (key, value) in dict {
-            if key == "eventName" {
-                if let eventNameValue = value as? String{
-                    eventName = eventNameValue
-                }
-            } else if key == AppsFlyerConstants.CURRENCY_KEY {
-                eventNewData[AppsFlyerConstants.AF_CURRENCY] = value
-            } else if key == AppsFlyerConstants.REVENUE_KEY {
-                eventNewData[AppsFlyerConstants.AF_REVENUE] = value
-            } else {
-                eventNewData[key] = value
-            }
+    private func handleGenericEvent(event: Event){
+        // Bools
+        var isRevenueEvent = false
+        let bindActionEvents = (self.eventSettings == AppsFlyerConstants.ACTIONS || self.eventSettings == AppsFlyerConstants.ALL)
+        let bindStateEvents = (self.eventSettings == AppsFlyerConstants.STATES || self.eventSettings == AppsFlyerConstants.ALL)
+        
+        print(event.description)
+        guard let eventData = event.data else {
+          logger("Couldn't extract event data")
+          return
+        }
+        let nestedData = eventData[AppsFlyerConstants.CONTEXT_DATA_KEY] as? [String : Any]
+        let eventState = eventData[AppsFlyerConstants.STATE_KEY] as? String
+        let eventAction = eventData[AppsFlyerConstants.ACTION_KEY] as? String
+        
+        if eventAction == AppsFlyerConstants.APPSFLYER_ATTRIBUTION_DATA || eventAction == AppsFlyerConstants.APPSFLYER_ENGAGEMENT_DATA {
+          logger("Discarding event binding for AppsFlyer Attribution Data event")
+          return
+        }
+        
+        let revenue = extractRevenue(nestedData)
+        let currency = extractCurrency(nestedData)
+        
+        var afPayloadProperties : [String : Any]? = nil
+          
+        if let revenue = revenue {
+          afPayloadProperties = nestedData
+          afPayloadProperties?[AppsFlyerConstants.AF_REVENUE] = revenue
+          afPayloadProperties?[AppsFlyerConstants.AF_CURRENCY] = currency
+          isRevenueEvent = true
+        }
+        if let eventAction = eventAction, bindActionEvents && eventAction.count != 0 {
+          if isRevenueEvent && afPayloadProperties != nil {
+            AppsFlyerLib.shared().logEvent(name: eventAction, values: afPayloadProperties!)
+          } else {
+            AppsFlyerLib.shared().logEvent(name: eventAction, values: nestedData)
+          }
+        }
+        if let eventState = eventState, bindStateEvents && eventState.count != 0 {
+          if isRevenueEvent && afPayloadProperties != nil {
+            AppsFlyerLib.shared().logEvent(name: eventState, values: afPayloadProperties!)
+          } else {
+            AppsFlyerLib.shared().logEvent(name: eventState, values: nestedData)
+          }
         }
     }
     
@@ -205,11 +193,11 @@ extension AppsFlyerAdobeExtension {
             logger("Couldn't extract event data")
             return
         }
-        var eventName = ""
+        var eventName = event.name
         if let dataDictionary = eventData["data"] as? [String: Any],
-           let eventAction = dataDictionary[AppsFlyerConstants.ACTION_KEY] as? String{
-            if eventAction == AppsFlyerConstants.APPSFLYER_ATTRIBUTION_DATA || eventAction == AppsFlyerConstants.APPSFLYER_ENGAGEMENT_DATA{
-                logger("Discarding event binding for AppsFlyer Attribution Data event")
+           let eventAction = dataDictionary[AppsFlyerConstants.ACTION_KEY] as? String {
+            if eventAction == AppsFlyerConstants.APPSFLYER_ATTRIBUTION_DATA || eventAction == AppsFlyerConstants.APPSFLYER_ENGAGEMENT_DATA {
+                logger("Discarding event binding for AppsFlyer Attribution/Engagement Data event")
                 return
             }
         }
@@ -221,6 +209,28 @@ extension AppsFlyerAdobeExtension {
             dictionaryManipulationForEdgeEvent(dict, &eventName, &eventNewData)
         }
         AppsFlyerLib.shared().logEvent(eventName, withValues: eventNewData)
+    }
+    
+    fileprivate func dictionaryManipulationForEdgeEvent(_ dict: [String : Any], _ eventName: inout String, _ eventNewData: inout [String : Any]) {
+        for (key, value) in dict {
+            if key == "eventName" {
+                if let eventNameValue = value as? String{
+                    eventName = eventNameValue
+                }
+            } else if key == AppsFlyerConstants.CURRENCY_KEY || key == AppsFlyerConstants.REVENUE_KEY {
+                continue
+            } else {
+                eventNewData[key] = value
+            }
+        }
+        
+        let revenue = extractRevenue(dict)
+        let currency = extractCurrency(dict)
+          
+        if let revenue = revenue {
+            eventNewData[AppsFlyerConstants.AF_REVENUE] = revenue
+            eventNewData[AppsFlyerConstants.AF_CURRENCY] = currency
+        }
     }
 }
 
