@@ -25,6 +25,7 @@ public class AppsFlyerAdobeExtension: NSObject, Extension {
   private static var gcd : [AnyHashable : Any]?
   // types of event that should be sent to Adobe Analytics
   private var eventSettings : String?
+  private var eventRegexFilteringSettings : String?
   private var didReceiveConfigurations = false
   private var didInit = false
   // should send onConversionDataSuccess result
@@ -106,6 +107,7 @@ extension AppsFlyerAdobeExtension {
     }
     //String
     let eventSettings = configSharedState[AppsFlyerConstants.AF_IAE_SETTINGS] as? String ?? AppsFlyerConstants.NONE
+    let eventRegexFilteringSettings = configSharedState[AppsFlyerConstants.AF_IAERF_SETTINGS] as? String ?? AppsFlyerConstants.NONE
     // Integers
     let appsFlyerIsDebug = configSharedState[AppsFlyerConstants.AF_DEBUG_KEY]
     let appsFlyerTrackAttrData = configSharedState[AppsFlyerConstants.AF_TRACK_ATTR_KEY]
@@ -117,7 +119,7 @@ extension AppsFlyerAdobeExtension {
     
     // init the SDK
     setupAppsFlyerConfiguration(appId: appsFlyerAppId, devKey: appsFlyerDevKey,
-                                isDebug: isDebug, logAttrData: logkAttrData, eventSettings: eventSettings, waitForECID: waitForECID)
+                                isDebug: isDebug, logAttrData: logkAttrData, eventSettings: eventSettings, eventRegexFiltering: eventRegexFilteringSettings, waitForECID: waitForECID)
   }
   
   /// Invoked when an event of type genericTrack and source request content is dispatched by the `EventHub`
@@ -194,7 +196,7 @@ extension AppsFlyerAdobeExtension {
   ///   - logAttrData: should send the conversion data to Adobe analytics
   ///   - eventSettings: the event types that should be sent to Adobe analytics
   ///   - waitForECID: should wait to ECID before `strat()` (send launch and event with `CUID`)
-  private func setupAppsFlyerConfiguration(appId: String, devKey: String, isDebug: Bool, logAttrData:Bool, eventSettings: String, waitForECID: Bool) {
+  private func setupAppsFlyerConfiguration(appId: String, devKey: String, isDebug: Bool, logAttrData:Bool, eventSettings: String, eventRegexFiltering: String, waitForECID: Bool) {
     // perform only once
     if !didReceiveConfigurations {
       if waitForECID{
@@ -234,6 +236,7 @@ extension AppsFlyerAdobeExtension {
       
       logAttributionData = logAttrData
       self.eventSettings = eventSettings
+      self.eventRegexFilteringSettings = eventRegexFiltering
       self.didReceiveConfigurations = true
       AppsFlyerAttribution.shared.bridgReady = true
       
