@@ -161,14 +161,15 @@ extension AppsFlyerAdobeExtension {
       afPayloadProperties?[AppsFlyerConstants.AF_CURRENCY] = currency
       isRevenueEvent = true
     }
-    if let eventAction = eventAction, bindActionEvents && eventAction.count != 0 {
+    if let eventAction = eventAction, bindActionEvents && eventAction.count != 0 && eventNameMatchesRegexFormula(eventNameToValidate: eventAction){
+      
       if isRevenueEvent && afPayloadProperties != nil {
         AppsFlyerLib.shared().logEvent(name: eventAction, values: afPayloadProperties!)
       } else {
         AppsFlyerLib.shared().logEvent(name: eventAction, values: nestedData)
       }
     }
-    if let eventState = eventState, bindStateEvents && eventState.count != 0 {
+    if let eventState = eventState, bindStateEvents && eventState.count != 0 && eventNameMatchesRegexFormula(eventNameToValidate: eventState){
       if isRevenueEvent && afPayloadProperties != nil {
         AppsFlyerLib.shared().logEvent(name: eventState, values: afPayloadProperties!)
       } else {
@@ -236,7 +237,8 @@ extension AppsFlyerAdobeExtension {
       
       logAttributionData = logAttrData
       self.eventSettings = eventSettings
-      self.eventRegexFilteringSettings = eventRegexFiltering
+      self.eventRegexFilteringSettings = "test.*"
+//      self.eventRegexFilteringSettings = eventRegexFiltering
       self.didReceiveConfigurations = true
       AppsFlyerAttribution.shared.bridgReady = true
       
@@ -357,6 +359,21 @@ extension AppsFlyerAdobeExtension {
     }
     return nil
   }
+    
+    private func eventNameMatchesRegexFormula(eventNameToValidate: String) -> Bool{
+        if let eventRegexFilteringSettings = self.eventRegexFilteringSettings, !eventRegexFilteringSettings.isEmpty {
+            do {
+                let regex = try NSRegularExpression(pattern: eventRegexFilteringSettings)
+                let range = NSRange(location: 0, length: eventNameToValidate.utf16.count)
+                return regex.firstMatch(in: eventNameToValidate, options: [], range: range) != nil
+            } catch {
+                print("Invalid regex: \(error.localizedDescription)")
+                return false
+            }
+        } else {
+            return true;
+        }
+    }
 }
 
 // MARK: Notifications implementetions 

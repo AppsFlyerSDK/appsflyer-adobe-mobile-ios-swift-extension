@@ -39,7 +39,7 @@ enum AppsFlyerConstants {
   static let AF_DEV_KEY = "appsFlyerDevKey"
   static let AF_APP_ID = "appsFlyerAppId"
   static let AF_IAE_SETTINGS = "inAppEventSetting"
-  static let AF_IAERF_SETTINGS = "inAppEventRegexFilteringSetting"
+  static let AF_IAERF_SETTINGS = "inAppEventsFilteringRegex"
   static let AF_DEBUG_KEY = "appsFlyerIsDebug"
   static let AF_TRACK_ATTR_KEY = "appsFlyerTrackAttrData"
   static let AF_ECID_KEY = "appsFlyerWaitForECID"
