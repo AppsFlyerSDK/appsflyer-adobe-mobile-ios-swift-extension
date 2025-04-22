@@ -18,7 +18,16 @@ public class AppsFlyerAdobeExtension: NSObject, Extension {
   public static var manual = false
   public static var extensionVersion = AppsFlyerConstants.EXTENSION_VERSION
   public var name: String = AppsFlyerConstants.EXTENSION_NAME
-    private var didInit = false
+  public var friendlyName: String = AppsFlyerConstants.FRIENDLY_NAME
+  public var metadata: [String : String]?
+  public var runtime: ExtensionRuntime
+        
+  // MARK: AppsFlyer properties
+  private static var gcd : [AnyHashable : Any]?
+  // types of event that should be sent to Adobe Analytics
+  private var eventSettings : String?
+  private var didReceiveConfigurations = false
+  private var didInit = false
   // should send onConversionDataSuccess result
   // to Adobe Analytics
   private var logAttributionData = false
@@ -29,15 +38,7 @@ public class AppsFlyerAdobeExtension: NSObject, Extension {
   private var mayStartSDK = true
   
   // MARK: AppsFlyer Delegates
-    public var friendlyName: String = AppsFlyerConstants.FRIENDLY_NAME
-      public var metadata: [String : String]?
-      public var runtime: ExtensionRuntime
-      
-      // MARK: AppsFlyer properties
-      private static var gcd : [AnyHashable : Any]?
-      // types of event that should be sent to Adobe Analytics
-      private var eventSettings : String?
-      private var didReceiveConfigurations = false
+
   // GCD + OAOA
   public static var delegate : AppsFlyerLibDelegate? = nil
   // UDL
