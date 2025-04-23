@@ -10,6 +10,7 @@ import AEPCore
 import AEPIdentity
 import AppsFlyerLib
 import UIKit
+import AEPEdge
 
 @objc(AppsFlyerAdobeExtension)
 public class AppsFlyerAdobeExtension: NSObject, Extension {
@@ -20,7 +21,7 @@ public class AppsFlyerAdobeExtension: NSObject, Extension {
   public var friendlyName: String = AppsFlyerConstants.FRIENDLY_NAME
   public var metadata: [String : String]?
   public var runtime: ExtensionRuntime
-  
+        
   // MARK: AppsFlyer properties
   private static var gcd : [AnyHashable : Any]?
   // types of event that should be sent to Adobe Analytics
@@ -37,6 +38,7 @@ public class AppsFlyerAdobeExtension: NSObject, Extension {
   private var mayStartSDK = true
   
   // MARK: AppsFlyer Delegates
+
   // GCD + OAOA
   public static var delegate : AppsFlyerLibDelegate? = nil
   // UDL
@@ -65,7 +67,9 @@ public class AppsFlyerAdobeExtension: NSObject, Extension {
     // Listener for Analytics Event binding
     // requestContentListener is invoked whenever the `EventHub` dispatches an event with type genericTrack and source request content
     self.registerListener(type: EventType.genericTrack, source: EventSource.requestContent, listener: requestContentListener(event:))
-    
+    // Listener for Edge Events
+    // requestContentListener is invoked whenever the `EventHub` dispatches an event with type Edge and source request content
+    self.registerListener(type: EventType.edge, source: EventSource.requestContent, listener: requestContentListener(event:))
   }
   
   /// Invoked when the AppsFlyerAdobeExtension extension has been unregistered by the `EventHub`.
@@ -129,51 +133,106 @@ extension AppsFlyerAdobeExtension {
       logger("error retreiving event binding state")
       return
     }
-    // Bools
-    var isRevenueEvent = false
-    let bindActionEvents = (self.eventSettings == AppsFlyerConstants.ACTIONS || self.eventSettings == AppsFlyerConstants.ALL)
-    let bindStateEvents = (self.eventSettings == AppsFlyerConstants.STATES || self.eventSettings == AppsFlyerConstants.ALL)
-    
-    print(event.description)
-    guard let eventData = event.data else {
-      logger("Couldn't extract event data")
-      return
-    }
-    let nestedData = eventData[AppsFlyerConstants.CONTEXT_DATA_KEY] as? [String : Any]
-    let eventState = eventData[AppsFlyerConstants.STATE_KEY] as? String
-    let eventAction = eventData[AppsFlyerConstants.ACTION_KEY] as? String
-    
-    if eventAction == AppsFlyerConstants.APPSFLYER_ATTRIBUTION_DATA || eventAction == AppsFlyerConstants.APPSFLYER_ENGAGEMENT_DATA {
-      logger("Discarding event binding for AppsFlyer Attribution Data event")
-      return
-    }
-    
-    let revenue = extractRevenue(nestedData)
-    let currency = extractCurrency(nestedData)
-    
-    var afPayloadProperties : [String : Any]? = nil
-    
-    if let revenue = revenue {
-      afPayloadProperties = nestedData
-      afPayloadProperties?[AppsFlyerConstants.AF_REVENUE] = revenue
-      afPayloadProperties?[AppsFlyerConstants.AF_CURRENCY] = currency
-      isRevenueEvent = true
-    }
-    if let eventAction = eventAction, bindActionEvents && eventAction.count != 0 {
-      if isRevenueEvent && afPayloadProperties != nil {
-        AppsFlyerLib.shared().logEvent(name: eventAction, values: afPayloadProperties!)
-      } else {
-        AppsFlyerLib.shared().logEvent(name: eventAction, values: nestedData)
-      }
-    }
-    if let eventState = eventState, bindStateEvents && eventState.count != 0 {
-      if isRevenueEvent && afPayloadProperties != nil {
-        AppsFlyerLib.shared().logEvent(name: eventState, values: afPayloadProperties!)
-      } else {
-        AppsFlyerLib.shared().logEvent(name: eventState, values: nestedData)
-      }
+
+    if event.type == EventType.edge{
+        handleEdgeEvent(event: event)
+        return
+    } else {
+        handleGenericEvent(event: event)
     }
   }
+    
+    private func handleGenericEvent(event: Event){
+        // Bools
+        var isRevenueEvent = false
+        let bindActionEvents = (self.eventSettings == AppsFlyerConstants.ACTIONS || self.eventSettings == AppsFlyerConstants.ALL)
+        let bindStateEvents = (self.eventSettings == AppsFlyerConstants.STATES || self.eventSettings == AppsFlyerConstants.ALL)
+        
+        print(event.description)
+        guard let eventData = event.data else {
+          logger("Couldn't extract event data")
+          return
+        }
+        let nestedData = eventData[AppsFlyerConstants.CONTEXT_DATA_KEY] as? [String : Any]
+        let eventState = eventData[AppsFlyerConstants.STATE_KEY] as? String
+        let eventAction = eventData[AppsFlyerConstants.ACTION_KEY] as? String
+        
+        if eventAction == AppsFlyerConstants.APPSFLYER_ATTRIBUTION_DATA || eventAction == AppsFlyerConstants.APPSFLYER_ENGAGEMENT_DATA {
+          logger("Discarding event binding for AppsFlyer Attribution Data event")
+          return
+        }
+        
+        let revenue = extractRevenue(nestedData)
+        let currency = extractCurrency(nestedData)
+        
+        var afPayloadProperties : [String : Any]? = nil
+          
+        if let revenue = revenue {
+          afPayloadProperties = nestedData
+          afPayloadProperties?[AppsFlyerConstants.AF_REVENUE] = revenue
+          afPayloadProperties?[AppsFlyerConstants.AF_CURRENCY] = currency
+          isRevenueEvent = true
+        }
+        if let eventAction = eventAction, bindActionEvents && eventAction.count != 0 {
+          if isRevenueEvent && afPayloadProperties != nil {
+            AppsFlyerLib.shared().logEvent(name: eventAction, values: afPayloadProperties!)
+          } else {
+            AppsFlyerLib.shared().logEvent(name: eventAction, values: nestedData)
+          }
+        }
+        if let eventState = eventState, bindStateEvents && eventState.count != 0 {
+          if isRevenueEvent && afPayloadProperties != nil {
+            AppsFlyerLib.shared().logEvent(name: eventState, values: afPayloadProperties!)
+          } else {
+            AppsFlyerLib.shared().logEvent(name: eventState, values: nestedData)
+          }
+        }
+    }
+    
+    private func handleEdgeEvent(event: Event){
+        guard let eventData = event.data else {
+            logger("Couldn't extract event data")
+            return
+        }
+        var eventName = event.name
+        if let dataDictionary = eventData["data"] as? [String: Any],
+           let eventAction = dataDictionary[AppsFlyerConstants.ACTION_KEY] as? String {
+            if eventAction == AppsFlyerConstants.APPSFLYER_ATTRIBUTION_DATA || eventAction == AppsFlyerConstants.APPSFLYER_ENGAGEMENT_DATA {
+                logger("Discarding event binding for AppsFlyer Attribution/Engagement Data event")
+                return
+            }
+        }
+        var eventNewData: [String: Any] = [:]
+        if let dict = eventData["xdm"] as? [String: Any] {
+            dictionaryManipulationForEdgeEvent(dict, &eventName, &eventNewData)
+        }
+        if let dict = eventData["data"] as? [String: Any] {
+            dictionaryManipulationForEdgeEvent(dict, &eventName, &eventNewData)
+        }
+        AppsFlyerLib.shared().logEvent(eventName, withValues: eventNewData)
+    }
+    
+    fileprivate func dictionaryManipulationForEdgeEvent(_ dict: [String : Any], _ eventName: inout String, _ eventNewData: inout [String : Any]) {
+        for (key, value) in dict {
+            if key == "eventName" {
+                if let eventNameValue = value as? String{
+                    eventName = eventNameValue
+                }
+            } else if key == AppsFlyerConstants.CURRENCY_KEY || key == AppsFlyerConstants.REVENUE_KEY {
+                continue
+            } else {
+                eventNewData[key] = value
+            }
+        }
+        
+        let revenue = extractRevenue(dict)
+        let currency = extractCurrency(dict)
+          
+        if let revenue = revenue {
+            eventNewData[AppsFlyerConstants.AF_REVENUE] = revenue
+            eventNewData[AppsFlyerConstants.AF_CURRENCY] = currency
+        }
+    }
 }
 
 // MARK: internal methods
@@ -390,8 +449,12 @@ extension AppsFlyerAdobeExtension : DeepLinkDelegate {
       if let dic = result.deepLink?.clickEvent {
         createSharedState(data: convertAnyHashableToStringDictionary(dic), event: nil)
         // send `clickEvent` to Adobe Analytics
-        MobileCore.track(action: AppsFlyerConstants.APPSFLYER_ENGAGEMENT_DATA, data: setKeyPrefix(oldDictionary:
-                                                                                                    setKeyPrefixDeepLinking(attributionData: dic)))
+        let dataToSend = setKeyPrefix(oldDictionary: setKeyPrefixDeepLinking(attributionData: dic))
+        MobileCore.track(action: AppsFlyerConstants.APPSFLYER_ENGAGEMENT_DATA, data: dataToSend)
+          let experienceEvent = ExperienceEvent(xdm: dataToSend, data: [AppsFlyerConstants.ACTION_KEY: AppsFlyerConstants.APPSFLYER_ENGAGEMENT_DATA])
+          Edge.sendEvent(experienceEvent: experienceEvent) { handle in
+              print(handle.description)
+          }
       }
     }
     AppsFlyerAdobeExtension.deepLinkDelegate?.didResolveDeepLink?(result)
@@ -413,7 +476,12 @@ extension AppsFlyerAdobeExtension : AppsFlyerLibDelegate {
           appendedInstallData[AppsFlyerConstants.ECID] = self.ecid!
         }
         // send `conversionInfo` to Adobe Analytics
-        MobileCore.track(action: AppsFlyerConstants.APPSFLYER_ATTRIBUTION_DATA , data: setKeyPrefix(oldDictionary: appendedInstallData))
+        let dataToSend = setKeyPrefix(oldDictionary: appendedInstallData)
+        MobileCore.track(action: AppsFlyerConstants.APPSFLYER_ATTRIBUTION_DATA , data: dataToSend)
+          let experienceEvent = ExperienceEvent(xdm: dataToSend, data: [AppsFlyerConstants.ACTION_KEY: AppsFlyerConstants.APPSFLYER_ATTRIBUTION_DATA])
+          Edge.sendEvent(experienceEvent: experienceEvent) { handle in
+              print(handle.description)
+          }
       }
     }
     AppsFlyerAdobeExtension.gcd = appendedInstallData
@@ -433,6 +501,11 @@ extension AppsFlyerAdobeExtension : AppsFlyerLibDelegate {
       // send `attributionData` to Adobe Analytics
       MobileCore.track(action: AppsFlyerConstants.APPSFLYER_ENGAGEMENT_DATA , data: setKeyPrefix(oldDictionary:
                                                                                                   setKeyPrefixDeepLinking(attributionData: newAttributionData)))
+        let experienceEvent = ExperienceEvent(xdm: setKeyPrefix(oldDictionary:
+                                                                    setKeyPrefixDeepLinking(attributionData: newAttributionData)), data: [AppsFlyerConstants.ACTION_KEY: AppsFlyerConstants.APPSFLYER_ENGAGEMENT_DATA])
+        Edge.sendEvent(experienceEvent: experienceEvent) { handle in
+            print(handle.description)
+        }
     }
     if ecid != nil {
       appendedAttributionData[AppsFlyerConstants.ECID] = self.ecid!
