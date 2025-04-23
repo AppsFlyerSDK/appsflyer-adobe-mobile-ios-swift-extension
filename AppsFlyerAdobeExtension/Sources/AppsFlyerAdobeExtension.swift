@@ -476,8 +476,9 @@ extension AppsFlyerAdobeExtension : AppsFlyerLibDelegate {
           appendedInstallData[AppsFlyerConstants.ECID] = self.ecid!
         }
         // send `conversionInfo` to Adobe Analytics
-        MobileCore.track(action: AppsFlyerConstants.APPSFLYER_ATTRIBUTION_DATA , data: setKeyPrefix(oldDictionary: appendedInstallData))
-          let experienceEvent = ExperienceEvent(xdm: setKeyPrefix(oldDictionary: appendedInstallData), data: [AppsFlyerConstants.ACTION_KEY: AppsFlyerConstants.APPSFLYER_ATTRIBUTION_DATA])
+        let dataToSend = setKeyPrefix(oldDictionary: appendedInstallData)
+        MobileCore.track(action: AppsFlyerConstants.APPSFLYER_ATTRIBUTION_DATA , data: dataToSend)
+          let experienceEvent = ExperienceEvent(xdm: dataToSend, data: [AppsFlyerConstants.ACTION_KEY: AppsFlyerConstants.APPSFLYER_ATTRIBUTION_DATA])
           Edge.sendEvent(experienceEvent: experienceEvent) { handle in
               print(handle.description)
           }
