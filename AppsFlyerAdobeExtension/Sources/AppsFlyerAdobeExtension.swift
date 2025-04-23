@@ -449,10 +449,9 @@ extension AppsFlyerAdobeExtension : DeepLinkDelegate {
       if let dic = result.deepLink?.clickEvent {
         createSharedState(data: convertAnyHashableToStringDictionary(dic), event: nil)
         // send `clickEvent` to Adobe Analytics
-        MobileCore.track(action: AppsFlyerConstants.APPSFLYER_ENGAGEMENT_DATA, data: setKeyPrefix(oldDictionary:
-                                                                                                    setKeyPrefixDeepLinking(attributionData: dic)))
-          let experienceEvent = ExperienceEvent(xdm: setKeyPrefix(oldDictionary:
-                                                                    setKeyPrefixDeepLinking(attributionData: dic)), data: [AppsFlyerConstants.ACTION_KEY: AppsFlyerConstants.APPSFLYER_ENGAGEMENT_DATA])
+        let dataToSend = setKeyPrefix(oldDictionary: setKeyPrefixDeepLinking(attributionData: dic))
+        MobileCore.track(action: AppsFlyerConstants.APPSFLYER_ENGAGEMENT_DATA, data: dataToSend)
+          let experienceEvent = ExperienceEvent(xdm: dataToSend, data: [AppsFlyerConstants.ACTION_KEY: AppsFlyerConstants.APPSFLYER_ENGAGEMENT_DATA])
           Edge.sendEvent(experienceEvent: experienceEvent) { handle in
               print(handle.description)
           }
