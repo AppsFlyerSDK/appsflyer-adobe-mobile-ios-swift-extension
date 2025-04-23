@@ -12,7 +12,7 @@
 
 ### <a id="plugin-build-for"> This plugin is built for
 
-- iOS AppsFlyer SDK **6.15.1**
+- iOS AppsFlyer SDK **6.16.2**
 
 <!---
 ## <a id="breaking-changes"> 	❗❗ Breaking changes when updating to ✏️v*.*.*✏️❗❗
