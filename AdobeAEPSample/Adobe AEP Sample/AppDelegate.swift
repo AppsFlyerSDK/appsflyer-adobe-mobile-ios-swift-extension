@@ -14,6 +14,7 @@ import AppsFlyerAdobeAEPExtension
 import AppsFlyerLib
 import AEPAnalytics
 import AEPMobileServices
+import AppTrackingTransparency
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -25,6 +26,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     let appState = application.applicationState
     // For legacy deep links
     AppsFlyerAdobeExtension.delegate = self
+      AppsFlyerLib.shared().waitForATTUserAuthorization(timeoutInterval: 30)
     // For UDL
     AppsFlyerAdobeExtension.deepLinkDelegate = self
     MobileCore.setLogLevel(.debug)
@@ -32,13 +34,42 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                                    Analytics.self,
                                    AEPMobileServices.self, AppsFlyerAdobeExtension.self]) {
     }
-    MobileCore.configureWith(appId: "REPLACE_WITH_YOUR_ADOBE_KEY")
+      MobileCore.configureWith(appId: "REPLACE_WITH_YOUR_ADOBE_KEY")
+
     if appState != .background {
       // only start lifecycle if the application is not in the background
       MobileCore.lifecycleStart(additionalContextData: nil)
     }
+      
+      // Delay ATT prompt to ensure it's not shown too early
+      DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+          self.requestAppTrackingTransparencyAuthorization()
+      }
+
     return true
   }
+
+func requestAppTrackingTransparencyAuthorization() {
+    if #available(iOS 14, *) {
+        ATTrackingManager.requestTrackingAuthorization { status in
+            switch status {
+            case .notDetermined:
+                print("ATT status: Not Determined")
+            case .restricted:
+                print("ATT status: Restricted")
+            case .denied:
+                print("ATT status: Denied")
+            case .authorized:
+                print("ATT status: Authorized")
+            @unknown default:
+                print("ATT status: Unknown")
+            }
+        }
+    } else {
+        // Fallback on earlier versions
+        print("ATT not available. iOS version < 14.")
+    }
+}
   
 
   // MARK: UISceneSession Lifecycle
