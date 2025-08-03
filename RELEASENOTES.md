@@ -1,3 +1,6 @@
+### 6.17.2
+* * Appsflyer SDK dependency to 6.17.2
+
 ### 6.16.2
 * * Appsflyer SDK dependency to 6.16.2
 
