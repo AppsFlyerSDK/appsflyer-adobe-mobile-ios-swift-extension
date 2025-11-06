@@ -17,7 +17,7 @@ let package = Package(
     dependencies: [
         // Dependencies declare other packages that this package depends on.
         // .package(url: /* package url */, from: "1.0.0"),
-        .package(name: "AppsFlyerLib" , url: "https://github.com/AppsFlyerSDK/AppsFlyerFramework-Static.git",  .exact("6.17.2")),
+        .package(name: "AppsFlyerLib" , url: "https://github.com/AppsFlyerSDK/AppsFlyerFramework-Static.git",  .exact("6.17.7")),
         .package(url: "https://github.com/adobe/aepsdk-core-ios.git", from: "4.0.0"),
         .package(url: "https://github.com/adobe/aepsdk-edge-ios.git", from: "4.0.0")
 
