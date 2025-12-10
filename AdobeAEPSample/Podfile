@@ -8,7 +8,7 @@ target 'Adobe AEP Sample' do
   pod 'AEPSignal'
   pod 'AEPMobileServices'
   pod 'AEPAnalytics' 
-  pod 'AppsFlyerAdobeAEPExtension','6.17.7'
+  pod 'AppsFlyerAdobeAEPExtension','6.17.8'
   pod 'AEPCore'
 
 end
