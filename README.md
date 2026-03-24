@@ -10,7 +10,7 @@
 > *When submitting an issue please specify your AppsFlyer sign-up (account) email , your app ID , production steps, logs, code snippets and any additional relevant information.*
 
 
-### <a id="plugin-build-for"> This plugin is built for
+### <a id="plugin-build-for"> This plugin is built for applyer
 
 - iOS AppsFlyer SDK **6.17.8**
 
