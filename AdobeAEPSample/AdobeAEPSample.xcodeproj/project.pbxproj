@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		7EB6C9FC2FC6FA28007F679F /* AppsFlyerAdobeAEPExtension in Frameworks */ = {isa = PBXBuildFile; productRef = 7EB6C9FB2FC6FA28007F679F /* AppsFlyerAdobeAEPExtension */; };
+		7EB6C9FF2FC6FE68007F679F /* AppsFlyerAdobeAEPExtension in Frameworks */ = {isa = PBXBuildFile; productRef = 7EB6C9FE2FC6FE68007F679F /* AppsFlyerAdobeAEPExtension */; };
 		C66DE3EB270F2FB700DE3AEC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C66DE3EA270F2FB700DE3AEC /* AppDelegate.swift */; };
 		C66DE3ED270F2FB700DE3AEC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C66DE3EC270F2FB700DE3AEC /* SceneDelegate.swift */; };
 		C66DE3EF270F2FB700DE3AEC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C66DE3EE270F2FB700DE3AEC /* ViewController.swift */; };
@@ -35,6 +36,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7EB6C9FF2FC6FE68007F679F /* AppsFlyerAdobeAEPExtension in Frameworks */,
 				7EB6C9FC2FC6FA28007F679F /* AppsFlyerAdobeAEPExtension in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -418,6 +420,10 @@
 		7EB6C9FB2FC6FA28007F679F /* AppsFlyerAdobeAEPExtension */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 7EB6C9FA2FC6FA28007F679F /* XCRemoteSwiftPackageReference "appsflyer-adobe-mobile-ios-swift-extension" */;
+			productName = AppsFlyerAdobeAEPExtension;
+		};
+		7EB6C9FE2FC6FE68007F679F /* AppsFlyerAdobeAEPExtension */ = {
+			isa = XCSwiftPackageProductDependency;
 			productName = AppsFlyerAdobeAEPExtension;
 		};
 /* End XCSwiftPackageProductDependency section */

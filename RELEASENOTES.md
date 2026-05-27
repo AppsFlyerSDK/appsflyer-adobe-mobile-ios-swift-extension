@@ -1,4 +1,4 @@
-### 6.17.9
+### 6.17.81
 * * Fix SPM dependency conflict by widening Adobe AEP SDK range to 5.x (`aepsdk-core-ios` and `aepsdk-edge-ios` now `.upToNextMajor(from: "5.0.0")`)
 
 ### 6.17.8
