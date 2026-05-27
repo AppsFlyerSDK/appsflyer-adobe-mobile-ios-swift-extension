@@ -13,7 +13,6 @@ import AEPSignal
 import AppsFlyerAdobeAEPExtension
 import AppsFlyerLib
 import AEPAnalytics
-import AEPMobileServices
 import AppTrackingTransparency
 
 @main
@@ -32,7 +31,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     MobileCore.setLogLevel(.debug)
     MobileCore.registerExtensions([Lifecycle.self, Identity.self, Signal.self,
                                    Analytics.self,
-                                   AEPMobileServices.self, AppsFlyerAdobeExtension.self]) {
+                                   AppsFlyerAdobeExtension.self]) {
     }
       MobileCore.configureWith(appId: "REPLACE_WITH_YOUR_ADOBE_KEY")
 
