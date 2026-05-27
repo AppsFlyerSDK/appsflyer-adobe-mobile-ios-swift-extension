@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7EB6C9FC2FC6FA28007F679F /* AppsFlyerAdobeAEPExtension in Frameworks */ = {isa = PBXBuildFile; productRef = 7EB6C9FB2FC6FA28007F679F /* AppsFlyerAdobeAEPExtension */; };
 		C66DE3EB270F2FB700DE3AEC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C66DE3EA270F2FB700DE3AEC /* AppDelegate.swift */; };
 		C66DE3ED270F2FB700DE3AEC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C66DE3EC270F2FB700DE3AEC /* SceneDelegate.swift */; };
 		C66DE3EF270F2FB700DE3AEC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C66DE3EE270F2FB700DE3AEC /* ViewController.swift */; };
@@ -34,6 +35,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7EB6C9FC2FC6FA28007F679F /* AppsFlyerAdobeAEPExtension in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -133,6 +135,10 @@
 				Base,
 			);
 			mainGroup = C66DE3DE270F2FB700DE3AEC;
+			packageReferences = (
+				7EB6C9FA2FC6FA28007F679F /* XCRemoteSwiftPackageReference "appsflyer-adobe-mobile-ios-swift-extension" */,
+				7EB6C9FD2FC6FA90007F679F /* XCRemoteSwiftPackageReference "aepsdk-analytics-ios" */,
+			);
 			productRefGroup = C66DE3E8270F2FB700DE3AEC /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -388,6 +394,33 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		7EB6C9FA2FC6FA28007F679F /* XCRemoteSwiftPackageReference "appsflyer-adobe-mobile-ios-swift-extension" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/AppsFlyerSDK/appsflyer-adobe-mobile-ios-swift-extension";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 6.17.8;
+			};
+		};
+		7EB6C9FD2FC6FA90007F679F /* XCRemoteSwiftPackageReference "aepsdk-analytics-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/adobe/aepsdk-analytics-ios";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.2;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		7EB6C9FB2FC6FA28007F679F /* AppsFlyerAdobeAEPExtension */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7EB6C9FA2FC6FA28007F679F /* XCRemoteSwiftPackageReference "appsflyer-adobe-mobile-ios-swift-extension" */;
+			productName = AppsFlyerAdobeAEPExtension;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = C66DE3DF270F2FB700DE3AEC /* Project object */;
 }
