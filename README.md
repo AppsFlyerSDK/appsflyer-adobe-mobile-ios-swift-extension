@@ -5,9 +5,8 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](/LICENSE.md)
 [![Version](https://img.shields.io/cocoapods/v/AppsFlyerAdobeAEPExtension.svg?style=flat)](http://cocoapods.org/pods/AppsFlyerAdobeAEPExtension)
 
-🛠 In order for us to provide optimal support, we would kindly ask you to submit any issues to support@appsflyer.com
-
-> *When submitting an issue please specify your AppsFlyer sign-up (account) email , your app ID , production steps, logs, code snippets and any additional relevant information.*
+🛠 In order for us to provide optimal support, please contact AppsFlyer support through the Customer Assistant Chatbot for assistance with troubleshooting issues or product guidance. </br>
+To do so, please follow [this article](https://support.appsflyer.com/hc/en-us/articles/23583984402193-Using-the-Customer-Assistant-Chatbot)
 
 
 ### <a id="plugin-build-for"> This plugin is built for
