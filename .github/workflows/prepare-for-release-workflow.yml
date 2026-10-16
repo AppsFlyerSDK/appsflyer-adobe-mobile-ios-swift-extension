@@ -7,6 +7,9 @@ on:
     branches:
       - 'main'
 
+permissions:
+  contents: write
+
 jobs:
   Prepare-Plugin-For-Production:
     if: startsWith(github.head_ref, 'releases/')
@@ -14,21 +17,37 @@ jobs:
     runs-on: macos-latest
     steps:
     - name: Checkout
-      uses: actions/checkout@v3
+      uses: actions/checkout@a37ce9120846195fa4ece8f58b268e6043cb2f26 # v3
     - name: PR branch check
-      uses: mdecoleman/pr-branch-name@1.2.0
+      uses: mdecoleman/pr-branch-name@0eff30e02b3234b740e7610b17f270b2e747dad1 # 1.2.0
       id: vars
       with:
         repo-token: ${{ secrets.CI_GITHUB_TOKEN }}       
     - name: Determine release tag and release branch
+      env:
+        BRANCH: ${{ steps.vars.outputs.branch }}
+        HEAD_REF: ${{ github.head_ref }}
       run: |
-        TAG=$(echo "${{ steps.vars.outputs.branch }}" | grep -Eo '[0-9]+.[0-9]+.[0-9]+')
-        echo "from branch: ${{github.head_ref}}"
-        echo "PLUGIN_VERSION=$TAG" >> $GITHUB_ENV  
+        TAG=$(echo "$BRANCH" | grep -Eo '[0-9]+\.[0-9]+\.[0-9]+' | head -n 1 || true)
+        if ! [[ "$TAG" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+          echo "Invalid release version extracted from branch name" >&2
+          exit 1
+        fi
+        if ! [[ "$BRANCH" =~ ^releases/[A-Za-z0-9._/-]+$ ]]; then
+          echo "Invalid release branch name" >&2
+          exit 1
+        fi
+        echo "from branch: $HEAD_REF"
+        echo "PLUGIN_VERSION=$TAG" >> "$GITHUB_ENV"
+        echo "RELEASE_BRANCH_NAME=$BRANCH" >> "$GITHUB_ENV"
     - name: run script
-      run: bash .github/bash_scripts/release.sh ${{env.PLUGIN_VERSION}}  
+      env:
+        VERSION: ${{ env.PLUGIN_VERSION }}
+      run: bash .github/bash_scripts/release.sh "$VERSION"
     - name: Commit and Push
-      run : |
+      env:
+        RELEASE_BRANCH: ${{ env.RELEASE_BRANCH_NAME }}
+      run: |
         git add .
         git commit -m"Commited from github action - prepaing the repo for production."
-        git push origin HEAD:${{ steps.vars.outputs.branch }} --force
+        git push origin "HEAD:refs/heads/$RELEASE_BRANCH" --force
