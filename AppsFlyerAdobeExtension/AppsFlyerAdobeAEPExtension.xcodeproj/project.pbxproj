@@ -510,7 +510,7 @@
 			repositoryURL = "https://github.com/AppsFlyerSDK/AppsFlyerFramework";
 			requirement = {
 				kind = exactVersion;
-				version = 6.5.4;
+				version = 6.17.7;
 			};
 		};
 		C66DE3D3270C605600DE3AEC /* XCRemoteSwiftPackageReference "aepsdk-core-ios" */ = {
