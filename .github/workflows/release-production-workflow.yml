@@ -8,29 +8,38 @@ on:
       - 'main'
       # - 'dev/add-release-workflow'
 
+permissions:
+  contents: write
+
 jobs:
   Deploy-To-Production:
     if: github.event.pull_request.merged == true && startsWith(github.head_ref, 'releases/')
     runs-on: [ios, self-hosted]
     steps:
     - name: Checkout
-      uses: actions/checkout@v3
+      uses: actions/checkout@a37ce9120846195fa4ece8f58b268e6043cb2f26 # v3
     - name: PR branch check
-      uses: mdecoleman/pr-branch-name@1.2.0
+      uses: mdecoleman/pr-branch-name@0eff30e02b3234b740e7610b17f270b2e747dad1 # 1.2.0
       id: vars
       with:
         repo-token: ${{ secrets.CI_GITHUB_TOKEN }}       
     - name: Determine release tag and release branch
+      env:
+        BRANCH: ${{ steps.vars.outputs.branch }}
+        HEAD_REF: ${{ github.head_ref }}
       run: |
-        TAG=$(echo "${{ steps.vars.outputs.branch }}" | grep -Eo '[0-9]+.[0-9]+.[0-9]+')
-        echo "PLUGIN_VERSION=$TAG" >> $GITHUB_ENV
-        echo "RELEASE_BRANCH_NAME=${{ steps.vars.outputs.branch }}" >> $GITHUB_ENV
-        echo "push new release >> $TAG"   
-        echo "from branch: ${{github.head_ref}}"
+        TAG=$(echo "$BRANCH" | grep -Eo '[0-9]+\.[0-9]+\.[0-9]+' | head -n 1 || true)
+        if ! [[ "$TAG" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+          echo "Invalid release version extracted from branch name" >&2
+          exit 1
+        fi
+        echo "PLUGIN_VERSION=$TAG" >> "$GITHUB_ENV"
+        echo "push new release >> $TAG"
+        echo "from branch: $HEAD_REF"
     - name: Create release and tag
       env:
         TAG: ${{env.PLUGIN_VERSION}}
-      uses: "actions/github-script@v5"
+      uses: "actions/github-script@211cb3fefb35a799baa5156f9321bb774fe56294" # v5
       with:
         script: |
           try {
@@ -51,7 +60,7 @@ jobs:
         pod trunk me
         pod trunk push AppsFlyerAdobeAEPExtension.podspec
     - name: Notify with SLack
-      uses: slackapi/slack-github-action@v1.23.0
+      uses: slackapi/slack-github-action@007b2c3c751a190b6f0f040e47ed024deaa72844 # v1.23.0
       with:
         payload: |
           {
